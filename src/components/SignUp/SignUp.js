@@ -12,6 +12,9 @@ class SignUp extends Component {
     super()
 
     this.state = {
+      name: '',
+      location: '',
+      biography: '',
       email: '',
       password: '',
       passwordConfirmation: ''
@@ -24,7 +27,7 @@ class SignUp extends Component {
 
   onSignUp = event => {
     event.preventDefault()
-
+    console.log('stuff from event.tar', event.target)
     const { msgAlert, history, setUser } = this.props
 
     signUp(this.state)
@@ -47,13 +50,46 @@ class SignUp extends Component {
   }
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
+    const { name, location, biography, email, password, passwordConfirmation } = this.state
 
     return (
       <div className="row">
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
           <h3>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
+            <Form.Group controlId="name">
+              <Form.Label>Artist Name</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="name"
+                value={name}
+                placeholder="Enter name"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="location">
+              <Form.Label>Location (optional)</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="location"
+                value={location}
+                placeholder="Enter location"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="biography">
+              <Form.Label>Biography (optional)</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="biography"
+                value={biography}
+                placeholder="Enter biography"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
             <Form.Group controlId="email">
               <Form.Label>Email address</Form.Label>
               <Form.Control
