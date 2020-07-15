@@ -12,9 +12,6 @@ import ChangePassword from './auth/ChangePassword'
 // Project Edits
 import Home from './Layout/Home'
 
-// Project Edits
-import Home from '../Home/Home'
-
 class App extends Component {
   constructor () {
     super()
