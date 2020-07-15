@@ -8,6 +8,7 @@ import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
 import ChangePassword from './auth/ChangePassword'
+import UpdateArtist from './auth/UpdateArtist'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -56,6 +57,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/update-artist' render={() => (
+            <UpdateArtist msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
         </main>
