@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class CreateArt extends Component {
+class UploadArt extends Component {
   constructor (props) {
     super(props)
     this.state = {
       name: '',
       description: '',
       // price: '',
-      ImgUrl: ''
+      imgUrl: ''
     }
   }
 
@@ -22,6 +22,7 @@ class CreateArt extends Component {
   }
 
   createArt = event => {
+    event.preventDefault()
     console.log('create art!', event.target)
   }
 
@@ -77,4 +78,4 @@ class CreateArt extends Component {
   }
 }
 
-export default CreateArt
+export default UploadArt
