@@ -1,6 +1,6 @@
 import React from 'react'
-import Layout from '../Layout/Layout'
-import MainPicture from '../MainPicture/MainPicture'
+import Layout from './Layout'
+import MainPicture from './MainPicture'
 
 const Home = () => (
   <Layout>
