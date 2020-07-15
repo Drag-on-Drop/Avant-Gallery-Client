@@ -1,7 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const addArtwork = formData => {
+export const addArtwork = (formData, user) => {
   return axios({
     method: 'POST',
     url: apiUrl + '/artworks',
@@ -12,7 +12,7 @@ export const addArtwork = formData => {
   })
 }
 
-export const showArtwork = formData => {
+export const showArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
     method: 'GET',
@@ -23,7 +23,7 @@ export const showArtwork = formData => {
   })
 }
 
-export const deleteArtwork = formData => {
+export const deleteArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
     method: 'DELETE',
@@ -33,7 +33,7 @@ export const deleteArtwork = formData => {
   })
 }
 
-export const editArtwork = formData => {
+export const editArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
     method: 'PATCH',
