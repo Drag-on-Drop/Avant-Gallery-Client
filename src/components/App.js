@@ -13,6 +13,8 @@ import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
 
+import IndexArtist from './auth/IndexArtist'
+
 // Project Edits
 import Home from './Layout/Home'
 
@@ -67,6 +69,8 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/update-artist' render={() => (
             <UpdateArtist msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
           <AuthenticatedRoute user={user} path='/upload-art' render={() => (
