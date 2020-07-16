@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+
+import { addArtwork } from '../../api/artwork'
+import messages from '../AutoDismissAlert/messages'
+
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -9,7 +14,7 @@ class UploadArt extends Component {
       name: '',
       description: '',
       // price: '',
-      imgUrl: ''
+      imageUrl: ''
     }
   }
 
@@ -24,10 +29,32 @@ class UploadArt extends Component {
   createArt = event => {
     event.preventDefault()
     console.log('create art!', event.target)
+    const { msgAlert, history, setArt, user } = this.props
+    let link = ''
+
+    addArtwork({ artwork: this.state }, user)
+      .then(res => {
+        link = res.data.artwork._id
+        setArt(res.data.artwork)
+      })
+      .then(() => msgAlert({
+        heading: 'Upload Success',
+        message: messages.artUploadSuccess,
+        variant: 'success'
+      }))
+      // Redirect to /artworks/:id
+      .then(() => history.push(`/artworks/${link}`))
+      .catch(error => {
+        this.setState({ name: '', description: '', imageUrl: '' })
+        msgAlert({
+          heading: 'Failed to post: ' + error.message,
+          message: messages.art
+        })
+      })
   }
 
   render () {
-    const { name, description, imgUrl } = this.state
+    const { name, description, imageUrl } = this.state
 
     return (
       <div>
@@ -60,8 +87,8 @@ class UploadArt extends Component {
             <Form.Control
               required
               type="text"
-              name="imgUrl"
-              value={imgUrl}
+              name="imageUrl"
+              value={imageUrl}
               placeholder="Enter Image Url"
               onChange={this.handleChange}
             />
@@ -78,4 +105,4 @@ class UploadArt extends Component {
   }
 }
 
-export default UploadArt
+export default withRouter(UploadArt)

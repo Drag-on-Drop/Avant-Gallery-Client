@@ -8,8 +8,11 @@ import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
 import ChangePassword from './auth/ChangePassword'
+
 import UpdateArtist from './auth/UpdateArtist'
+
 import UploadArt from './artwork/UploadArt'
+import ShowArt from './artwork/ShowArt'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -20,13 +23,17 @@ class App extends Component {
 
     this.state = {
       user: null,
-      msgAlerts: []
+      msgAlerts: [],
+
+      art: null
     }
   }
 
   setUser = user => this.setState({ user })
-
   clearUser = () => this.setState({ user: null })
+
+  setArt = art => this.setState({ art })
+  clearArt = () => this.setState({ art: null })
 
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
@@ -62,8 +69,15 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/update-artist' render={() => (
             <UpdateArtist msgAlert={this.msgAlert} user={user} />
           )} />
+          {/* Need user prop to declare owner of art? */}
           <AuthenticatedRoute user={user} path='/upload-art' render={() => (
-            <UploadArt msgAlert={this.msgAlert} user={user} />
+            <UploadArt
+              msgAlert={this.msgAlert}
+              setArt={this.setArt}
+              user={user} />
+          )} />
+          <Route path='/artworks/:id' render={(props) => (
+            <ShowArt {...props} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/' component={Home} />
         </main>

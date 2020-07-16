@@ -1,5 +1,6 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
+
 export const addArtwork = (formData, user) => {
   return axios({
     method: 'POST',
@@ -10,16 +11,14 @@ export const addArtwork = (formData, user) => {
     data: formData
   })
 }
-export const showArtwork = (formData, user) => {
+
+export const showArtwork = (artId) => {
   return axios({
-    url: apiUrl + '/artworks',
-    method: 'GET',
-    headers: {
-      'Authorization': `Token token=${user.token}`
-    },
-    data: formData
+    url: apiUrl + `/artworks/${artId}`,
+    method: 'GET'
   })
 }
+
 export const deleteArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
@@ -29,6 +28,7 @@ export const deleteArtwork = (formData, user) => {
     }
   })
 }
+
 export const editArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
