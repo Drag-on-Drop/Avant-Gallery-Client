@@ -15,6 +15,8 @@ import IndexArt from './artwork/IndexArt'
 
 import IndexArtist from './auth/IndexArtist'
 
+import ShowArtist from './Layout/ShowArtist'
+
 // Project Edits
 import Home from './Layout/Home'
 
@@ -86,6 +88,9 @@ class App extends Component {
             <IndexArt {...props} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/artists/:id' render={(props) => (
+            <ShowArtist {...props} msgAlert={this.msgAlert} />
+          )} />
         </main>
       </Fragment>
     )
