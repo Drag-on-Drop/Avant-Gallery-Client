@@ -7,13 +7,14 @@ class ShowArtist extends Component {
   constructor (props) {
     super(props)
 
-    // this.state = { user: null }
+    this.state = { artist: null }
 
-    this.state = {
-      name: null,
-      location: null,
-      biography: null
-    }
+  //   this.state = {
+  //     name: null,
+  //     location: null,
+  //     biography: null,
+  //     notFound: null
+  //   }
   }
 
   componentDidMount () {
@@ -21,9 +22,10 @@ class ShowArtist extends Component {
       .then(response => {
         console.log(response)
         this.setState({
-          name: response.data.user.name,
-          location: response.data.user.location,
-          biography: response.data.user.biography,
+          // name: response.data.artist.name,
+          // location: response.data.artist.location,
+          // biography: response.data.artist.biography,
+          artist: response.data.artist,
           notFound: false
         })
       })
@@ -44,7 +46,7 @@ class ShowArtist extends Component {
   }
 
   render () {
-    if (!this.state.art && !this.state.notFound) {
+    if (!this.state.artist && !this.state.notFound) {
       return (
         <div className="loading-artist">
           <p>Loading...</p>
@@ -60,7 +62,7 @@ class ShowArtist extends Component {
       )
     }
 
-    const { name, location, biography } = this.state
+    const { name, location, biography } = this.state.artist
 
     return (
       <div className="show-artist">
