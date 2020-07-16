@@ -9,7 +9,7 @@ export const updateArtist = (artist, user) => {
       'Authorization': `Token token=${user.token}`
     },
     data: {
-      artist: {
+      credentials: {
         name: artist.name,
         location: artist.location,
         biography: artist.biography
