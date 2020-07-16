@@ -7,11 +7,9 @@ import Header from './Layout/Header'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
-import ChangePassword from './auth/ChangePassword'
-
 import UpdateArtist from './auth/UpdateArtist'
-
 import UploadArt from './artwork/UploadArt'
+import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 
 // Project Edits
@@ -63,8 +61,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/user-settings' render={() => (
+            <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/update-artist' render={() => (
             <UpdateArtist msgAlert={this.msgAlert} user={user} />
