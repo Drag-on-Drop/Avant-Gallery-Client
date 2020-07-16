@@ -1,6 +1,6 @@
 {
   "name": "react-auth-template",
-  "homepage": "https://Drag-on-Drop.github.io/Avant-Gallery-Server",
+  "homepage": "https://Drag-on-Drop.github.io/Avant-Gallery-Client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
