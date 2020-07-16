@@ -10,7 +10,7 @@ import SignOut from './auth/SignOut'
 import ChangePassword from './auth/ChangePassword'
 
 import UpdateArtist from './auth/UpdateArtist'
-
+import IndexArtist from './auth/IndexArtist'
 import UploadArt from './artwork/UploadArt'
 import ShowArt from './artwork/ShowArt'
 
@@ -59,6 +59,9 @@ class App extends Component {
           )} />
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
+          )} />
+          <Route user={user} path='/view-artists' render={() => (
+            <IndexArtist msgAlert={this.msgAlert} />
           )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
