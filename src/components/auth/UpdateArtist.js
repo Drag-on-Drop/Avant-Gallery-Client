@@ -18,9 +18,13 @@ class UpdateArtist extends Component {
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
+  handleChange = event => this.setState({ [event.target.name]: event.target.value
   })
+
+  // handleChange = event => {
+  //   this.setState({ [event.target.name]: event.target.value })
+  //   console.log(event.target.value, 'what is event.target.value')
+  // }
 
   onUpdateArtist = event => {
     event.preventDefault()
@@ -28,6 +32,7 @@ class UpdateArtist extends Component {
     const { msgAlert, history, user } = this.props
 
     updateArtist(this.state, user)
+      // .then(console.log(user, 'what is user'))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
