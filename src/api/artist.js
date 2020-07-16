@@ -17,3 +17,10 @@ export const updateArtist = (artist, user) => {
     }
   })
 }
+
+export const indexArtist = () => {
+  return axios({
+    url: apiUrl + '/view-artists',
+    method: 'GET'
+  })
+}
