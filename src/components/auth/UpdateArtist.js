@@ -14,7 +14,8 @@ class UpdateArtist extends Component {
     this.state = {
       name: '',
       location: '',
-      biography: ''
+      biography: '',
+      email: ''
     }
   }
 
@@ -40,7 +41,7 @@ class UpdateArtist extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ name: '', location: '', biography: '' })
+        this.setState({ name: '', location: '', biography: '', email: '' })
         msgAlert({
           heading: 'Update Artist Failed with error: ' + error.message,
           message: messages.updateArtistFailure,
@@ -50,7 +51,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    const { name, location, biography } = this.state
+    const { name, location, biography, email } = this.state
 
     return (
       <div className="row">
@@ -87,6 +88,17 @@ class UpdateArtist extends Component {
                 value={biography}
                 type="string"
                 placeholder="Biography"
+                onChange={this.handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="Email">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+
+                name="email"
+                value={email}
+                type="email"
+                placeholder="Email"
                 onChange={this.handleChange}
               />
             </Form.Group>
