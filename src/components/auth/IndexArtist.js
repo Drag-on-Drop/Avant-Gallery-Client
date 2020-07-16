@@ -10,7 +10,6 @@ class IndexArtist extends Component {
       artists: null
     }
   }
-
   onIndexArtist = event => {
     event.preventDefault()
     const { msgAlert } = this.props
@@ -29,7 +28,6 @@ class IndexArtist extends Component {
         console.log(error)
       })
   }
-
   render () {
     let jsx
     if (this.state.artists === null) {
