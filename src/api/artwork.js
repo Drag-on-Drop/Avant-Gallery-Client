@@ -19,6 +19,13 @@ export const showArtwork = (artId) => {
   })
 }
 
+export const indexArtwork = () => {
+  return axios({
+    url: apiUrl + '/artworks/',
+    method: 'GET'
+  })
+}
+
 export const deleteArtwork = (formData, user) => {
   return axios({
     url: apiUrl + '/artworks',
