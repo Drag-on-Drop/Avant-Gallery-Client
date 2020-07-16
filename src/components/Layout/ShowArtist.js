@@ -31,10 +31,7 @@ class ShowArtist extends Component {
       })
       .catch(error => {
         this.setState({
-          name: null,
-          location: null,
-          biography: null,
-          notFound: true
+          artist: null
         })
         console.error(error)
         this.props.msgAlert({
