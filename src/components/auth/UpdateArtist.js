@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { updateArtist } from '../../api/update-artist'
+import { updateArtist } from '../../api/artist'
 import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'

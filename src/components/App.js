@@ -13,7 +13,7 @@ import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
 
-import IndexArtist from './'
+import IndexArtist from './auth/IndexArtist'
 
 // Project Edits
 import Home from './Layout/Home'

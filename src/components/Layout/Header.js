@@ -21,6 +21,7 @@ const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
     <Nav.Link href="#artworks">All Art</Nav.Link>
+    <Nav.Link href="#view-artists">All Artists</Nav.Link>
   </Fragment>
 )
 
