@@ -53,13 +53,18 @@ class ShowArt extends Component {
       )
     }
 
-    const { imageUrl, name, description, owner } = this.state.art
+    const { imageUrl, name, description, owner, createdAt } = this.state.art
 
+    // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
         <a href={imageUrl}>{imageUrl}</a>
-        <p>{name}, by {owner}</p>
-        <p>{description}</p>
+        <p>{name}, by {owner.name}</p>
+        <p>Description: {description}</p>
+        <p>Email: {owner.email}</p>
+        <p>Location: {owner.location}</p>
+        <p>Biography: {owner.biography}</p>
+        <p>Posted on: {createdAt}</p>
       </div>
     )
   }

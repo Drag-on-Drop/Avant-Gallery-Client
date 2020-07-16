@@ -13,8 +13,16 @@ export const updateArtist = (artist, user) => {
       credentials: {
         name: artist.name,
         location: artist.location,
-        biography: artist.biography
+        biography: artist.biography,
+        email: artist.email
       }
     }
+  })
+}
+
+export const indexArtist = () => {
+  return axios({
+    url: apiUrl + '/view-artists',
+    method: 'GET'
   })
 }

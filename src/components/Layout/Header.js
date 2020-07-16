@@ -4,11 +4,10 @@ import Navbar from 'react-bootstrap/Navbar'
 
 const authenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#update-artist">Update Artist</Nav.Link>
     <Nav.Link href="#upload-art">Upload Art</Nav.Link>
     <Nav.Link href="#artists">Temp. Profile Lnk</Nav.Link>
+    <Nav.Link href="#user-settings">User Settings</Nav.Link>
   </Fragment>
 )
 
@@ -22,6 +21,8 @@ const unauthenticatedOptions = (
 const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
+    <Nav.Link href="#artworks">All Art</Nav.Link>
+    <Nav.Link href="#view-artists">All Artists</Nav.Link>
   </Fragment>
 )
 

@@ -11,7 +11,8 @@ export default {
   artUploadSuccess: 'Your art is now posted, show the world!',
   artUploadFailure: 'An error occured, unable to upload your image.',
   showArtFailure: 'An error occured, unable to show this image.',
+  indexArtFailure: 'An error occured, unable to show the index.',
 
   // Artist messaging:
-  showArtistFailure: 'An error occured, unable to show artist.'
+  showArtistFailure: 'An error occured, unable to show artist.'  
 }
