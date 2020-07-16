@@ -12,8 +12,7 @@ export const updateArtist = (artist, user) => {
       artist: {
         name: artist.name,
         location: artist.location,
-        biography: artist.biography,
-        email: artist.email
+        biography: artist.biography
       }
     }
   })
