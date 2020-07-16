@@ -14,6 +14,8 @@ import UpdateArtist from './auth/UpdateArtist'
 import UploadArt from './artwork/UploadArt'
 import ShowArt from './artwork/ShowArt'
 
+import ShowArtist from './Layout/ShowArtist'
+
 // Project Edits
 import Home from './Layout/Home'
 
@@ -80,6 +82,9 @@ class App extends Component {
             <ShowArt {...props} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/artists/:id' render={(props) => (
+            <ShowArtist {...props} msgAlert={this.msgAlert} />
+          )} />
         </main>
       </Fragment>
     )
