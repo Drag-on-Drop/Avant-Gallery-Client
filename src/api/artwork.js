@@ -26,9 +26,9 @@ export const indexArtwork = () => {
   })
 }
 
-export const deleteArtwork = (formData, user) => {
+export const deleteArtwork = (artId, user) => {
   return axios({
-    url: apiUrl + '/artworks',
+    url: apiUrl + `/artworks/${artId}`,
     method: 'DELETE',
     headers: {
       'Authorization': `Token token=${user.token}`
