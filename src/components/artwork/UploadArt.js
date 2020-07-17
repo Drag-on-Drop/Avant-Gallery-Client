@@ -48,7 +48,8 @@ class UploadArt extends Component {
         this.setState({ name: '', description: '', imageUrl: '' })
         msgAlert({
           heading: 'Failed to post: ' + error.message,
-          message: messages.art
+          message: messages.artUploadFailure,
+          variant: 'danger'
         })
       })
   }
