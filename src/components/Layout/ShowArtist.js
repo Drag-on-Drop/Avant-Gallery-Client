@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { showArtist } from '../../api/artist-api'
 import messages from '../AutoDismissAlert/messages'
+import { CardColumns, Card } from 'react-bootstrap'
 
 class ShowArtist extends Component {
   constructor (props) {
@@ -18,7 +19,8 @@ class ShowArtist extends Component {
   }
 
   componentDidMount () {
-    showArtist(this.props.match.params.id)
+    const id = this.props.match.params.id
+    showArtist(id)
       .then(response => {
         console.log(response)
         this.setState({
@@ -63,11 +65,30 @@ class ShowArtist extends Component {
     const { name, location, biography } = this.state.artist
 
     return (
-      <div className="show-artist">
-        <h1>{name}</h1>
-        <h4>{location}</h4>
-        <p>{biography}</p>
-      </div>
+      <React.Fragment>
+        <div className="show-artist">
+          <h1>{name}</h1>
+          <h4>{location}</h4>
+          <p>{biography}</p>
+        </div>
+
+        <div>
+          <CardColumns>
+            {this.state.artist.artwork.map((art) => (
+              <Card key={art._id}>
+                <Card.Img variant="top" src={art.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{art.name}</Card.Title>
+                  <Card.Text>{art.owner.name}</Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">Posted at {art.createdAt}</small>
+                </Card.Footer>
+              </Card>
+            ))}
+          </CardColumns>
+        </div>
+      </React.Fragment>
     )
   }
 }

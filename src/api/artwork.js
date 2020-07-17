@@ -26,6 +26,13 @@ export const indexArtwork = () => {
   })
 }
 
+// export const indexArtistArtwork = (artistId) => {
+//   return axios({
+//     url: apiUrl + `/artworks/${artistId}`,
+//     method: 'GET'
+//   })
+// }
+
 export const deleteArtwork = (artId, user) => {
   return axios({
     url: apiUrl + `/artworks/${artId}`,
