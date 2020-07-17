@@ -7,13 +7,13 @@ import Header from './Layout/Header'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
-import UpdateArtist from './auth/UpdateArtist'
+import UpdateArtist from './artist/UpdateArtist'
 import UploadArt from './artwork/UploadArt'
 import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
 
-import IndexArtist from './auth/IndexArtist'
+import IndexArtist from './artist/IndexArtist'
 
 import ShowArtist from './Layout/ShowArtist'
 
