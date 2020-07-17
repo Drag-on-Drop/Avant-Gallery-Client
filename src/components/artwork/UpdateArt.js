@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { editArt } from '../../api/artwork'
+import { editArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -26,7 +26,7 @@ class UpdateArt extends Component {
 
     const { user, history, msgAlert, setArt } = this.props
 
-    editArt(this.state, user)
+    editArtwork(this.state, user)
       .then(res => {
         const artwork = res.data.artwork
         setArt(artwork)
