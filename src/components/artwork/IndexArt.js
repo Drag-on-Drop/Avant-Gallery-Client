@@ -3,8 +3,9 @@ import { indexArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import { Link } from 'react-router-dom'
 import { CardColumns, Card } from 'react-bootstrap'
-import DestroyArt from './DestroyArt'
-import UpdateArt from './UpdateArt'
+// import DestroyArt from './DestroyArt'
+// import UpdateArt from './UpdateArt'
+// import ShowArt from './ShowArt'
 
 class IndexArt extends Component {
   constructor (props) {
@@ -64,8 +65,9 @@ class IndexArt extends Component {
             </Link>
           ))}
         </CardColumns>
+        { /* <DestroyArt />
         <UpdateArt />
-        <DestroyArt />
+        <ShowArt /> */ }
       </div>
     )
   }
