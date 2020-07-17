@@ -3,6 +3,7 @@ import { indexArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 
 import { CardColumns, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class IndexArt extends Component {
   constructor (props) {
@@ -48,16 +49,18 @@ class IndexArt extends Component {
       <div>
         <CardColumns>
           {this.state.artworks.map((art) => (
-            <Card key={art._id}>
-              <Card.Img variant="top" src={art.imageUrl} />
-              <Card.Body>
-                <Card.Title>{art.name}</Card.Title>
-                <Card.Text>{art.owner.name}</Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">Posted at {art.createdAt}</small>
-              </Card.Footer>
-            </Card>
+            <Link to={`/artworks/${art._id}`} key={art._id}>
+              <Card>
+                <Card.Img variant="top" src={art.imageUrl} />
+                <Card.Body>
+                  <Card.Title>{art.name}</Card.Title>
+                  <Card.Text>{art.owner.name}</Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                  <small className="text-muted">Posted at {art.createdAt}</small>
+                </Card.Footer>
+              </Card>
+            </Link>
           ))}
         </CardColumns>
       </div>
