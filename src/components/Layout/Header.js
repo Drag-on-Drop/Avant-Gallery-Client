@@ -2,14 +2,16 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
-const authenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#upload-art">Upload Art</Nav.Link>
-    <Nav.Link href="#artists">My Profile</Nav.Link>
-    <Nav.Link href="#user-settings">User Settings</Nav.Link>
-  </Fragment>
-)
+const authenticatedOptions = (user) => {
+  return (
+    <Fragment>
+      <Nav.Link href="#upload-art">Upload Art</Nav.Link>
+      <Nav.Link href={`#artists/${user._id}`}>My Profile</Nav.Link>
+      <Nav.Link href="#user-settings">User Settings</Nav.Link>
+      <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    </Fragment>
+  )
+}
 
 const unauthenticatedOptions = (
   <Fragment>
@@ -36,7 +38,7 @@ const Header = ({ user }) => (
       <Nav className="ml-auto">
         { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
+        { user ? authenticatedOptions(user) : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>
