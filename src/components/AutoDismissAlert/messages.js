@@ -12,6 +12,10 @@ export default {
   artUploadFailure: 'An error occured, unable to upload your image.',
   showArtFailure: 'An error occured, unable to show this image.',
   indexArtFailure: 'An error occured, unable to show the index.',
+  artDeleteSuccess: 'Art successfully deleted.',
+  artDeleteFailure: 'An error occured, unable to delete this submission.',
+  artEditSuccess: 'Submission successfully edited.',
+  artEditFailure: 'An error occured, unable to edit this submission. Please try again.',
 
   // Artist messaging:
   showArtistFailure: 'An error occured, unable to show artist.'
