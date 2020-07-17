@@ -74,8 +74,9 @@ class ChangePassword extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="dark"
               type="submit"
+              size="sm"
             >
               Submit
             </Button>
