@@ -6,7 +6,7 @@ const authenticatedOptions = (
   <Fragment>
     <Nav.Link href="#sign-out">Sign Out</Nav.Link>
     <Nav.Link href="#upload-art">Upload Art</Nav.Link>
-    <Nav.Link href="#artists">Temp. Profile Lnk</Nav.Link>
+    <Nav.Link href="#artists">My Profile</Nav.Link>
     <Nav.Link href="#user-settings">User Settings</Nav.Link>
   </Fragment>
 )
@@ -21,8 +21,8 @@ const unauthenticatedOptions = (
 const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
-    <Nav.Link href="#artworks">All Art</Nav.Link>
-    <Nav.Link href="#view-artists">All Artists</Nav.Link>
+    <Nav.Link href="#artworks">Art</Nav.Link>
+    <Nav.Link href="#view-artists">Artists</Nav.Link>
   </Fragment>
 )
 
