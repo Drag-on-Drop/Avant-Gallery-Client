@@ -7,34 +7,41 @@ class IndexArtist extends Component {
   constructor () {
     super()
     this.state = {
-      artists: null
+      artists: null,
+      notFound: false
     }
   }
 
-  onIndexArtist = event => {
-    event.preventDefault()
+  componentDidMount () {
     const { msgAlert } = this.props
     indexArtist()
+      .then((res) => {
+        this.setState({
+          artists: res.data.artists,
+          notFound: false
+        })
+      })
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      .then((res) => {
-        this.setState({
-          artists: res.data.artist
-        })
-      })
       .catch(error => {
         console.log(error)
+        this.setState({
+          artists: null,
+          notFound: true
+        })
       })
   }
 
   render () {
     let jsx
-    if (this.state.artists === null) {
+    if (this.state.notFound) {
+      jsx = <p>Cannot connect to server.</p>
+    } else if (this.state.artists === null) {
       jsx = <p>Loading... </p>
-    } else if (this.state.books.length === 0) {
+    } else if (this.state.artists.length === 0) {
       jsx = <p>No artists</p>
     } else {
       jsx = (
