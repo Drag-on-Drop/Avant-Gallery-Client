@@ -9,8 +9,8 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       name: this.props.user.name,
