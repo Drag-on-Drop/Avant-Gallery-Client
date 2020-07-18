@@ -66,9 +66,11 @@ class ShowArtist extends Component {
 
     return (
       <React.Fragment>
+        <br />
         <div className="show-artist">
           <h1>{name}</h1>
-          <h4>{location}</h4>
+          <p style={{ color: 'grey' }}>{location}</p>
+          <br />
           <p>{biography}</p>
         </div>
 
