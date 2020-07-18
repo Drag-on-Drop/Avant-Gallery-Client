@@ -48,6 +48,7 @@ class IndexArt extends Component {
 
     return (
       <div>
+        <br/>
         <CardColumns>
           {this.state.artworks.map((art) => (
             <Link to={`/artworks/${art._id}`} key={art._id}>

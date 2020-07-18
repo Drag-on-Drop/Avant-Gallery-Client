@@ -58,8 +58,8 @@ class UploadArt extends Component {
     const { name, description, imageUrl } = this.state
 
     return (
-      <div>
-        <h3>Post your art here!</h3>
+      <div className="col-sm-10 col-md-8 mx-auto mt-5">
+        <h3>Post your art here</h3>
         <Form onSubmit={this.createArt}>
           <Form.Group controlId="name">
             <Form.Label>Piece Title</Form.Label>
@@ -95,8 +95,9 @@ class UploadArt extends Component {
             />
           </Form.Group>
           <Button
-            variant="primary"
+            variant="dark"
             type="submit"
+            size="sm"
           >
             Submit
           </Button>
