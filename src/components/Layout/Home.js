@@ -1,12 +1,14 @@
 import React from 'react'
-import Layout from './Layout'
+// import Layout from './Layout'
 import MainPicture from './MainPicture'
 
 const Home = () => (
-  <Layout>
+  // <Layout>
+  <div>
     <h4>Home</h4>
     <MainPicture></MainPicture>
-  </Layout>
+  </div>
+  // </Layout>
 )
 
 export default Home

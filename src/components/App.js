@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
 import Header from './Layout/Header'
+import Footer from './Layout/Footer'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
@@ -92,6 +93,7 @@ class App extends Component {
             <ShowArtist {...props} msgAlert={this.msgAlert} />
           )} />
         </main>
+        <Footer />
       </Fragment>
     )
   }
