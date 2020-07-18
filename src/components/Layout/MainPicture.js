@@ -10,7 +10,7 @@ const MainPicture = () => (
     <Row>
       <Col>
         <Image src="https://images.pexels.com/photos/2570059/pexels-photo-2570059.jpeg" alt="Art" fluid/>
-        <h6>Main Picture Description</h6>
+        <p style={{ color: 'grey', textAlign: 'right' }}>Loc. Unknown</p>
       </Col>
     </Row>
   </Container>

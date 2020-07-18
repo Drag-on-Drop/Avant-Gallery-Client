@@ -5,7 +5,7 @@ import MainPicture from './MainPicture'
 const Home = () => (
   // <Layout>
   <div>
-    <h4>Home</h4>
+    <br/>
     <MainPicture></MainPicture>
   </div>
   // </Layout>
