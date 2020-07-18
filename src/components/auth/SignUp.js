@@ -88,6 +88,7 @@ class SignUp extends Component {
                 value={biography}
                 placeholder="Enter biography"
                 onChange={this.handleChange}
+                as="textarea"
               />
             </Form.Group>
             <Form.Group controlId="email">
