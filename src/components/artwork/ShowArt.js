@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 
@@ -59,7 +59,10 @@ class ShowArt extends Component {
     return (
       <div className="show-art">
         <a href={imageUrl}>{imageUrl}</a>
-        <p>{name}, by {owner.name}</p>
+        <p>{name}, by <Link to={`/artists/${owner._id}`}>
+          {owner.name}
+        </Link>
+        </p>
         <p>Description: {description}</p>
         <p>Email: {owner.email}</p>
         <p>Location: {owner.location}</p>
