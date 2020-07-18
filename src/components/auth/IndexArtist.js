@@ -60,7 +60,7 @@ class IndexArtist extends Component {
     }
     return (
       <div>
-        <h3>Artist Page</h3>
+        <h3>Artists</h3>
         {jsx}
       </div>
     )
