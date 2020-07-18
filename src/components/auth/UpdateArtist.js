@@ -13,19 +13,14 @@ class UpdateArtist extends Component {
     super()
 
     this.state = {
-      name: '',
-      location: '',
-      biography: ''
+      name: this.props.user.name,
+      location: this.props.user.location,
+      biography: this.props.user.biography
     }
   }
 
   handleChange = event => this.setState({ [event.target.name]: event.target.value
   })
-
-  // handleChange = event => {
-  //   this.setState({ [event.target.name]: event.target.value })
-  //   console.log(event.target.value, 'what is event.target.value')
-  // }
 
   onUpdateArtist = event => {
     event.preventDefault()

@@ -21,16 +21,16 @@ class IndexArtist extends Component {
           notFound: false
         })
       })
-      .then(() => msgAlert({
-        heading: 'Update Artist Success',
-        message: messages.updateArtistSuccess,
-        variant: 'success'
-      }))
       .catch(error => {
         console.log(error)
         this.setState({
           artists: null,
           notFound: true
+        })
+        msgAlert({
+          heading: 'Could not reach Server',
+          message: messages.indexArtistFailure,
+          variant: 'success'
         })
       })
   }

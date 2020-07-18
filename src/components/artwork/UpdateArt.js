@@ -31,7 +31,8 @@ class UpdateArt extends Component {
         const artwork = res.data.artwork
         setArt(artwork)
         this.setState({
-          artwork: artwork,
+          name: artwork.name,
+          description: artwork.name,
           edited: true
         })
         msgAlert({
@@ -53,7 +54,7 @@ class UpdateArt extends Component {
 
   render () {
     //
-    const { name, description, imageUrl } = this.state
+    const { name, description } = this.state
     // bootstrap form
     return (
       <div>
@@ -78,17 +79,6 @@ class UpdateArt extends Component {
               name="description"
               value={description}
               placeholder="Enter Description"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="ImgUrl">
-            <Form.Label>Image Url</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="imageUrl"
-              value={imageUrl}
-              placeholder="Enter Image Url"
               onChange={this.handleChange}
             />
           </Form.Group>

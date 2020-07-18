@@ -13,17 +13,13 @@ class IndexArt extends Component {
       artworks: []
       // pageNumber: 1
     }
-    console.log(props, 'what is props')
   }
 
   componentDidMount () {
     indexArtwork()
-      .then(response => {
-        console.log(response, 'what is response')
-        this.setState({
-          artworks: response.data.artworks
-        })
-      })
+      .then(response => this.setState({
+        artworks: response.data.artworks
+      }))
       .catch(error => {
         this.setState({
           artworks: null

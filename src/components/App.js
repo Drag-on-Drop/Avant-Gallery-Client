@@ -13,9 +13,7 @@ import UploadArt from './artwork/UploadArt'
 import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
-
 import IndexArtist from './auth/IndexArtist'
-
 import ShowArtist from './Layout/ShowArtist'
 
 // Project Edits
