@@ -31,7 +31,7 @@ const alwaysOptions = (
 const Header = ({ user }) => (
   <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      Avant G&apos;ART
+      Gallery d&apos;Art
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
