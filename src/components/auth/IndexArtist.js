@@ -48,11 +48,11 @@ class IndexArtist extends Component {
         <ul>
           {this.state.artists.map(artist => {
             return (
-              <li key={artist._id}>
+              <p key={artist._id}>
                 <Link to={`/artists/${artist._id}`}>
                   {artist.name}
                 </Link>
-              </li>
+              </p>
             )
           })}
         </ul>
@@ -60,7 +60,7 @@ class IndexArtist extends Component {
     }
     return (
       <div>
-        <h2>Artist Page</h2>
+        <h3>Artist Page</h3>
         {jsx}
       </div>
     )

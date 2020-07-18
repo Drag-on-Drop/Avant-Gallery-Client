@@ -9,8 +9,7 @@ const MainPicture = () => (
   <Container>
     <Row>
       <Col>
-        <h1>Main Picture</h1>
-        <Image src="https://i.imgur.com/XedXDn5.jpg" alt="Art" fluid/>
+        <Image src="https://images.pexels.com/photos/2570059/pexels-photo-2570059.jpeg" alt="Art" fluid/>
         <h6>Main Picture Description</h6>
       </Col>
     </Row>
