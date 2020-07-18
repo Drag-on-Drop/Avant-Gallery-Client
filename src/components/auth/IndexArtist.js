@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { indexArtist } from '../../api/artist'
 import messages from '../AutoDismissAlert/messages'
+import { ListGroup } from 'react-bootstrap'
 
 class IndexArtist extends Component {
   constructor () {
@@ -45,17 +46,17 @@ class IndexArtist extends Component {
       jsx = <p>No artists</p>
     } else {
       jsx = (
-        <ul>
+        <ListGroup>
           {this.state.artists.map(artist => {
             return (
-              <p key={artist._id}>
+              <ListGroup.Item key={artist._id}>
                 <Link to={`/artists/${artist._id}`}>
                   {artist.name}
                 </Link>
-              </p>
+              </ListGroup.Item>
             )
           })}
-        </ul>
+        </ListGroup>
       )
     }
     return (
