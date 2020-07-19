@@ -1,35 +1,35 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
-import { indexArtist } from '../../api/artist'
-import messages from '../AutoDismissAlert/messages'
+import { indexUser } from '../../../api/user'
+import messages from '../../Alerts/messages'
 
-class IndexArtist extends Component {
+class IndexUser extends Component {
   constructor () {
     super()
     this.state = {
-      artists: null,
+      users: null,
       notFound: false
     }
   }
 
   componentDidMount () {
     const { msgAlert } = this.props
-    indexArtist()
+    indexUser()
       .then((res) => {
         this.setState({
-          artists: res.data.artists,
+          users: res.data.users,
           notFound: false
         })
       })
       .then(() => msgAlert({
-        heading: 'Update Artist Success',
-        message: messages.updateArtistSuccess,
+        heading: 'Update User Success',
+        message: messages.updateUserSuccess,
         variant: 'success'
       }))
       .catch(error => {
         console.log(error)
         this.setState({
-          artists: null,
+          users: null,
           notFound: true
         })
       })
@@ -39,18 +39,18 @@ class IndexArtist extends Component {
     let jsx
     if (this.state.notFound) {
       jsx = <p>Cannot connect to server.</p>
-    } else if (this.state.artists === null) {
+    } else if (this.state.users === null) {
       jsx = <p>Loading... </p>
-    } else if (this.state.artists.length === 0) {
-      jsx = <p>No artists</p>
+    } else if (this.state.users.length === 0) {
+      jsx = <p>No Artists</p>
     } else {
       jsx = (
         <ul>
-          {this.state.artists.map(artist => {
+          {this.state.users.map(user => {
             return (
-              <p key={artist._id}>
-                <Link to={`/artists/${artist._id}`}>
-                  {artist.name}
+              <p key={user._id}>
+                <Link to={`/artists/${user._id}`}>
+                  {user.name}
                 </Link>
               </p>
             )
@@ -67,4 +67,4 @@ class IndexArtist extends Component {
   }
 }
 
-export default withRouter(IndexArtist)
+export default withRouter(IndexUser)

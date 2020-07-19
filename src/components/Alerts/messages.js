@@ -8,7 +8,7 @@ export default {
   changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
 
   // Art messages. Consider moving these into a new file.
-  artUploadSuccess: 'Your art is now posted, show the world!',
+  artUploadSuccess: 'Your image is now posted, show the world!',
   artUploadFailure: 'An error occured, unable to upload your image.',
   showArtFailure: 'An error occured, unable to show this image.',
   indexArtFailure: 'An error occured, unable to show the index.',
@@ -17,6 +17,6 @@ export default {
   artEditSuccess: 'Submission successfully edited.',
   artEditFailure: 'An error occured, unable to edit this submission. Please try again.',
 
-  // Artist messaging:
-  showArtistFailure: 'An error occured, unable to show artist.'
+  // User messaging:
+  showUserFailure: 'An error occured, unable to show user.'
 }

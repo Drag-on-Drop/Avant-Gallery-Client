@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { signUp, signIn } from '../../api/auth'
-import messages from '../AutoDismissAlert/messages'
-
+import { signUp, signIn } from '../../../api/auth'
+import messages from '../../Alerts/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -58,7 +56,7 @@ class SignUp extends Component {
           <h3>Sign Up</h3>
           <Form onSubmit={this.onSignUp}>
             <Form.Group controlId="name">
-              <Form.Label>Artist Name</Form.Label>
+              <Form.Label>User Name</Form.Label>
               <Form.Control
                 required
                 type="text"

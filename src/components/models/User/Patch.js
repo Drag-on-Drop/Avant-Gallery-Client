@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { updateArtist } from '../../api/artist'
-import messages from '../AutoDismissAlert/messages'
-
+import { patchUser } from '../../../api/user'
+import messages from '../../Alerts/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
-class UpdateArtist extends Component {
+class PatchUser extends Component {
   constructor () {
     super()
 
@@ -27,24 +25,24 @@ class UpdateArtist extends Component {
   //   console.log(event.target.value, 'what is event.target.value')
   // }
 
-  onUpdateArtist = event => {
+  onPatchUser = event => {
     event.preventDefault()
 
     const { msgAlert, history, user } = this.props
 
-    updateArtist(this.state, user)
+    patchUser(this.state, user)
       // .then(console.log(user, 'what is user'))
       .then(() => msgAlert({
-        heading: 'Update Artist Success',
-        message: messages.updateArtistSuccess,
+        heading: 'Update User Success',
+        message: messages.updateUserSuccess,
         variant: 'success'
       }))
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ name: '', location: '', biography: '', email: '' })
         msgAlert({
-          heading: 'Update Artist Failed with error: ' + error.message,
-          message: messages.updateArtistFailure,
+          heading: 'Update User Failed with error: ' + error.message,
+          message: messages.updateUserFailure,
           variant: 'danger'
         })
       })
@@ -57,8 +55,8 @@ class UpdateArtist extends Component {
       // <div className="row">
       // <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
-        <h3>Update Artist</h3>
-        <Form onSubmit={this.onUpdateArtist}>
+        <h3>Update User</h3>
+        <Form onSubmit={this.onPatchUser}>
           <Form.Group controlId="Name">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -108,4 +106,4 @@ class UpdateArtist extends Component {
   }
 }
 
-export default withRouter(UpdateArtist)
+export default withRouter(PatchUser)

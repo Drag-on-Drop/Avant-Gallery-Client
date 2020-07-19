@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { deleteArtwork } from '../../api/artwork'
+import { deleteImage } from '../../../api/image'
+import messages from '../../Alerts/messages'
 import Button from 'react-bootstrap/Button'
-import messages from '../AutoDismissAlert/messages'
 
-class DestroyArt extends Component {
+class DestroyImage extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -13,13 +13,13 @@ class DestroyArt extends Component {
   }
 
   onDelete = event => {
-    const { art, user, history, msgAlert } = this.props
-    deleteArtwork(art.id, user)
+    const { image, user, history, msgAlert } = this.props
+    deleteImage(image.id, user)
       .then(() => {
         this.setState({ destroyed: true })
         msgAlert({
           heading: 'Delete Success',
-          message: messages.artDeleteSuccess,
+          message: messages.imageDeleteSuccess,
           variant: 'success'
         })
         history.push('/')
@@ -29,7 +29,7 @@ class DestroyArt extends Component {
         msgAlert({
           heading: 'Failed to delete: ' +
           error.message,
-          message: messages.artDeleteFailure
+          message: messages.imageDeleteFailure
         })
       })
   }

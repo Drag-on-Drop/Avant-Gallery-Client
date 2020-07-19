@@ -2,29 +2,29 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
-const authenticatedOptions = (user) => {
+const auth = (user) => {
   return (
     <Fragment>
-      <Nav.Link href="#upload-art">Upload Art</Nav.Link>
-      <Nav.Link href={`#artists/${user._id}`}>My Profile</Nav.Link>
+      <Nav.Link href="#upload-image">Upload Art</Nav.Link>
+      <Nav.Link href={`#users/${user._id}`}>My Profile</Nav.Link>
       <Nav.Link href="#user-settings">User Settings</Nav.Link>
       <Nav.Link href="#sign-out">Sign Out</Nav.Link>
     </Fragment>
   )
 }
 
-const unauthenticatedOptions = (
+const unauth = (
   <Fragment>
     <Nav.Link href="#sign-up">Sign Up</Nav.Link>
     <Nav.Link href="#sign-in">Sign In</Nav.Link>
   </Fragment>
 )
 
-const alwaysOptions = (
+const standardNav = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
-    <Nav.Link href="#artworks">Art</Nav.Link>
-    <Nav.Link href="#view-artists">Artists</Nav.Link>
+    <Nav.Link href="#images">Art</Nav.Link>
+    <Nav.Link href="#artists">Artists</Nav.Link>
   </Fragment>
 )
 
@@ -36,9 +36,9 @@ const Header = ({ user }) => (
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
-        { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
-        { alwaysOptions }
-        { user ? authenticatedOptions(user) : unauthenticatedOptions }
+        { user && <span className="navbar-text mr-2">Welcome to the gallery, {user.email}</span>}
+        { standardNav }
+        { user ? auth(user) : unauth }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

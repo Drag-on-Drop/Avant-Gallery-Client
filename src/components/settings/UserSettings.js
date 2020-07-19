@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import UpdateArtist from '../auth/UpdateArtist'
-import ChangePassword from '../auth/ChangePassword'
+import PatchUser from '../models/User/Patch'
+import ChangePassword from '../models/Auth/ChangePassword'
 import Row from 'react-bootstrap/Row'
 
 class UserSettings extends Component {
@@ -21,7 +21,7 @@ class UserSettings extends Component {
       <div>
         <br />
         <Row>
-          <UpdateArtist msgAlert={msgAlert} user={user}/>
+          <PatchUser msgAlert={msgAlert} user={user}/>
           <ChangePassword msgAlert={msgAlert} user={user}/>
         </Row>
       </div>

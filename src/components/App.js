@@ -1,25 +1,23 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
-import AuthenticatedRoute from './AuthenticatedRoute'
-import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
+import AuthenticatedRoute from './Settings/AuthenticatedRoute'
+import UserSettings from './Settings/UserSettings'
+import AutoDismissAlert from './Alerts/AutoDismissAlert'
 import Header from './Layout/Header'
 import Footer from './Layout/Footer'
-import SignUp from './auth/SignUp'
-import SignIn from './auth/SignIn'
-import SignOut from './auth/SignOut'
-import UpdateArtist from './auth/UpdateArtist'
-import UploadArt from './artwork/UploadArt'
-import UserSettings from './settings/UserSettings'
-import ShowArt from './artwork/ShowArt'
-import IndexArt from './artwork/IndexArt'
-
-import IndexArtist from './auth/IndexArtist'
-
-import ShowArtist from './Layout/ShowArtist'
+import Home from './Layout/Home'
+import SignUp from './models/Auth/SignUp'
+import SignIn from './models/Auth/SignIn'
+import SignOut from './models/Auth/SignOut'
+import GetUser from './models/User/Get'
+import PatchUser from './models/User/Patch'
+import IndexUser from './models/User/Index'
+import PostImage from './models/Image/Post'
+import GetImage from './models/Image/Get'
+import IndexImage from './models/Image/Index'
 
 // Project Edits
-import Home from './Layout/Home'
 
 class App extends Component {
   constructor () {
@@ -29,15 +27,15 @@ class App extends Component {
       user: null,
       msgAlerts: [],
 
-      art: null
+      image: null
     }
   }
 
   setUser = user => this.setState({ user })
   clearUser = () => this.setState({ user: null })
 
-  setArt = art => this.setState({ art })
-  clearArt = () => this.setState({ art: null })
+  setImage = image => this.setState({ image })
+  clearImage = () => this.setState({ image: null })
 
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
@@ -70,27 +68,27 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/user-settings' render={() => (
             <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/update-artist' render={() => (
-            <UpdateArtist msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/update-user' render={() => (
+            <PatchUser msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
+          <Route user={user} path='/artists' render={() => (<IndexUser msgAlert={this.msgAlert} />
           )} />
-          {/* Need user prop to declare owner of art? */}
-          <AuthenticatedRoute user={user} path='/upload-art' render={() => (
-            <UploadArt
+          {/* Need user prop to declare owner of image? */}
+          <AuthenticatedRoute user={user} path='/upload-image' render={() => (
+            <PostImage
               msgAlert={this.msgAlert}
-              setArt={this.setArt}
+              setImage={this.setImage}
               user={user} />
           )} />
-          <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} msgAlert={this.msgAlert} />
+          <Route path='/images/:id' render={(props) => (
+            <GetImage {...props} msgAlert={this.msgAlert} />
           )} />
-          <Route exact path='/artworks' render={(props) => (
-            <IndexArt {...props} msgAlert={this.msgAlert} />
+          <Route exact path='/images' render={(props) => (
+            <IndexImage {...props} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/' component={Home} />
           <Route exact path='/artists/:id' render={(props) => (
-            <ShowArtist {...props} msgAlert={this.msgAlert} />
+            <GetUser {...props} msgAlert={this.msgAlert} />
           )} />
         </main>
         <Footer />

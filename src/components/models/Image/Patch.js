@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { editArt } from '../../api/artwork'
-import messages from '../AutoDismissAlert/messages'
+import { patchImage } from '../../../api/image'
+import messages from '../../Alerts/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class UpdateArt extends Component {
+class PatchImage extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      name: props.artwork.name,
-      description: props.artwork.description,
+      name: props.image.name,
+      description: props.image.description,
       edited: false
     }
   }
@@ -24,28 +23,28 @@ class UpdateArt extends Component {
   onUpdateArt = event => {
     event.preventDefault()
 
-    const { user, history, msgAlert, setArt } = this.props
+    const { user, history, msgAlert, setImage } = this.props
 
     editArt(this.state, user)
       .then(res => {
-        const artwork = res.data.artwork
-        setArt(artwork)
+        const image = res.data.image
+        setImage(image)
         this.setState({
-          artwork: artwork,
+          image: image,
           edited: true
         })
         msgAlert({
           heading: 'Edit Success',
-          message: messages.artEditSuccess,
+          message: messages.patchImageSuccess,
           variant: 'success'
         })
-        return artwork
+        return image
       })
-      .then(artwork => history.push(`/artworks/${artwork._id}`))
+      .then(image => history.push(`/images/${image._id}`))
       .catch(error => {
         msgAlert({
           heading: 'Edit Failure: ' + error.message,
-          message: messages.artEditFailure,
+          message: messages.patchImageFailure,
           variant: 'danger'
         })
       })
@@ -57,7 +56,7 @@ class UpdateArt extends Component {
     // bootstrap form
     return (
       <div>
-        <h3>Edit this art piece</h3>
+        <h3>Edit this image piece</h3>
         <Form onSubmit={this.onUpdateArt}>
           <Form.Group controlId="name">
             <Form.Label>Piece Title</Form.Label>
@@ -82,13 +81,13 @@ class UpdateArt extends Component {
             />
           </Form.Group>
           <Form.Group controlId="ImgUrl">
-            <Form.Label>Image Url</Form.Label>
+            <Form.Label>User Url</Form.Label>
             <Form.Control
               required
               type="text"
               name="imageUrl"
               value={imageUrl}
-              placeholder="Enter Image Url"
+              placeholder="Enter User Url"
               onChange={this.handleChange}
             />
           </Form.Group>
@@ -105,4 +104,4 @@ class UpdateArt extends Component {
   }
 }
 
-export default withRouter(UpdateArt)
+export default withRouter(PatchImage)

@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { addArtwork } from '../../api/artwork'
-import messages from '../AutoDismissAlert/messages'
-
+import { postImage } from '../../../api/image'
+import messages from '../../Alerts/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-class UploadArt extends Component {
+class PostImage extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -26,29 +24,28 @@ class UploadArt extends Component {
     })
   }
 
-  createArt = event => {
+  postImage = event => {
     event.preventDefault()
-    console.log('create art!', event.target)
-    const { msgAlert, history, setArt, user } = this.props
+    const { msgAlert, history, setImage, user } = this.props
     let link = ''
 
-    addArtwork({ artwork: this.state }, user)
+    postImage({ image: this.state }, user)
       .then(res => {
-        link = res.data.artwork._id
-        setArt(res.data.artwork)
+        link = res.data.image._id
+        setImage(res.data.image)
       })
       .then(() => msgAlert({
         heading: 'Upload Success',
         message: messages.artUploadSuccess,
         variant: 'success'
       }))
-      // Redirect to /artworks/:id
-      .then(() => history.push(`/artworks/${link}`))
+      // Redirect to /images/:id
+      .then(() => history.push(`/images/${link}`))
       .catch(error => {
         this.setState({ name: '', description: '', imageUrl: '' })
         msgAlert({
-          heading: 'Failed to post: ' + error.message,
-          message: messages.artUploadFailure,
+          heading: 'Error failed to post image: ' + error.message,
+          message: messages.postImageFailure,
           variant: 'danger'
         })
       })
@@ -59,8 +56,8 @@ class UploadArt extends Component {
 
     return (
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-        <h3>Post your art here</h3>
-        <Form onSubmit={this.createArt}>
+        <h3>Post your image here</h3>
+        <Form onSubmit={this.postImage}>
           <Form.Group controlId="name">
             <Form.Label>Piece Title</Form.Label>
             <Form.Control
@@ -84,13 +81,13 @@ class UploadArt extends Component {
             />
           </Form.Group>
           <Form.Group controlId="ImgUrl">
-            <Form.Label>Image Url</Form.Label>
+            <Form.Label>User Url</Form.Label>
             <Form.Control
               required
               type="text"
               name="imageUrl"
               value={imageUrl}
-              placeholder="Enter Image Url"
+              placeholder="Enter User Url"
               onChange={this.handleChange}
             />
           </Form.Group>
@@ -107,4 +104,4 @@ class UploadArt extends Component {
   }
 }
 
-export default withRouter(UploadArt)
+export default withRouter(PostImage)

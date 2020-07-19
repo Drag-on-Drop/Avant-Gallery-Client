@@ -1,32 +1,29 @@
 import React, { Component } from 'react'
-import { indexArtwork } from '../../api/artwork'
-import messages from '../AutoDismissAlert/messages'
-
+import { indexImage } from '../../../api/image'
+import messages from '../../Alerts/messages'
 import { CardColumns, Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
-class IndexArt extends Component {
+class IndexImage extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      artworks: []
+      images: []
       // pageNumber: 1
     }
-    console.log(props, 'what is props')
   }
 
   componentDidMount () {
-    indexArtwork()
-      .then(response => {
-        console.log(response, 'what is response')
+    indexImage()
+      .then(res => {
         this.setState({
-          artworks: response.data.artworks
+          images: res.data.images
         })
       })
       .catch(error => {
         this.setState({
-          artworks: null
+          images: null
         })
         this.props.msgAlert({
           heading: 'Could not reach server: ' + error.message,
@@ -35,31 +32,28 @@ class IndexArt extends Component {
         })
       })
   }
-
   render () {
-    console.log('render art', this.state.artworks)
-    if (!this.state.artworks) {
+    if (!this.state.images) {
       return (
         <div className="index-not-found">
-          <p>Could not connect to server, please try again.</p>
+          <p>We could not connect to the server, please try again later.</p>
         </div>
       )
     }
-
     return (
       <div>
         <br/>
         <CardColumns>
-          {this.state.artworks.map((art) => (
-            <Link to={`/artworks/${art._id}`} key={art._id}>
+          {this.state.images.map((image) => (
+            <Link to={`/images/${image._id}`} key={image._id}>
               <Card>
-                <Card.Img variant="top" src={art.imageUrl} />
+                <Card.Img variant="top" src={image.imageUrl} />
                 <Card.Body>
-                  <Card.Title>{art.name}</Card.Title>
-                  <Card.Text>{art.owner.name}</Card.Text>
+                  <Card.Title>{image.name}</Card.Title>
+                  <Card.Text>{image.owner.name}</Card.Text>
                 </Card.Body>
                 <Card.Footer>
-                  <small className="text-muted">Posted at {art.createdAt}</small>
+                  <small className="text-muted">Posted at {image.createdAt}</small>
                 </Card.Footer>
               </Card>
             </Link>
@@ -70,4 +64,4 @@ class IndexArt extends Component {
   }
 }
 
-export default IndexArt
+export default IndexImage
