@@ -81,7 +81,9 @@ class App extends Component {
               user={user} />
           )} />
           <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} msgAlert={this.msgAlert} />
+            <ShowArt {...props}
+              msgAlert={this.msgAlert}
+              setArt={this.setArt}/>
           )} />
           <Route exact path='/artworks' render={(props) => (
             <IndexArt {...props} msgAlert={this.msgAlert} />

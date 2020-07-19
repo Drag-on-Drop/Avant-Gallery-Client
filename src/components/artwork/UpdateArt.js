@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
-import { editArt } from '../../api/artwork'
+import { updateArt } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -9,11 +8,10 @@ import Button from 'react-bootstrap/Button'
 class UpdateArt extends Component {
   constructor (props) {
     super(props)
-
     this.state = {
+      artwork: props.artwork,
       name: props.artwork.name,
-      description: props.artwork.description,
-      edited: false
+      description: props.artwork.description
     }
   }
 
@@ -23,37 +21,32 @@ class UpdateArt extends Component {
 
   onUpdateArt = event => {
     event.preventDefault()
-
-    const { user, history, msgAlert, setArt } = this.props
-
-    editArt(this.state, user)
-      .then(res => {
-        const artwork = res.data.artwork
-        setArt(artwork)
-        this.setState({
-          name: artwork.name,
-          description: artwork.name,
-          edited: true
-        })
-        msgAlert({
-          heading: 'Edit Success',
-          message: messages.artEditSuccess,
-          variant: 'success'
-        })
-        return artwork
+    // pass msgAlert, in the props
+    const { user, history, setArt, msgAlert, match } = this.props
+    const artwork = {
+      name: this.state.name,
+      description: this.state.description
+    }
+    updateArt(artwork, match.params.id, user)
+      .then(() => {
+        setArt(this.state.artwork)
+        return this.state.artwork
       })
-      .then(artwork => history.push(`/artworks/${artwork._id}`))
-      .catch(error => {
-        msgAlert({
-          heading: 'Edit Failure: ' + error.message,
-          message: messages.artEditFailure,
-          variant: 'danger'
-        })
-      })
+      .then(() => msgAlert({
+        heading: 'Edit Success',
+        message: messages.artEditSuccess,
+        variant: 'success'
+      }))
+      // .then(() => history.push(`/artworks/${match.params.id}`))
+      .then(() => history.push('/'))
+      .catch(error => { console.log('the error is:', error) })
+      // msgAlert({
+      //   heading: 'Oh no! Edit Failure: ' + error.message,
+      //   message: messages.artEditFailure,
+      //   variant: 'danger'
+      // })
   }
-
   render () {
-    //
     const { name, description } = this.state
     // bootstrap form
     return (
@@ -63,7 +56,6 @@ class UpdateArt extends Component {
           <Form.Group controlId="name">
             <Form.Label>Piece Title</Form.Label>
             <Form.Control
-              required
               type="text"
               name="name"
               value={name}
@@ -74,7 +66,6 @@ class UpdateArt extends Component {
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              required
               type="text"
               name="description"
               value={description}
@@ -83,9 +74,8 @@ class UpdateArt extends Component {
             />
           </Form.Group>
           <Button
-            variant="dark"
+            variant="primary"
             type="submit"
-            size="sm"
           >
             Submit
           </Button>

@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
+import UpdateArt from './UpdateArt'
 
 class ShowArt extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
+      user: props.user,
       art: null,
       notFound: false
     }
@@ -21,6 +23,7 @@ class ShowArt extends Component {
           art: response.data.artwork,
           notFound: false
         })
+        this.props.setArt(this.state.art)
       })
       .catch(error => {
         this.setState({
@@ -54,6 +57,19 @@ class ShowArt extends Component {
     }
 
     const { imageUrl, name, description, owner, createdAt } = this.state.art
+    let editForm = ''
+
+    console.log('user?', this.props.user)
+    console.log('state user?', this.state.user)
+    if (this.state.user) {
+      console.log('user? in if', this.props.user)
+      console.log('state user? in if', this.state.user)
+      editForm = <UpdateArt
+        artwork={this.state.art}
+        msgAlert={this.props.msgAlert}
+        user={this.props.user}
+        setArt={this.props.setArt} />
+    }
 
     // Some of these paragraphs should be pulled into a React component
     return (
@@ -68,6 +84,7 @@ class ShowArt extends Component {
         <p>Location: {owner.location}</p>
         <p>Biography: {owner.biography}</p>
         <p>Posted on: {createdAt}</p>
+        {editForm}
       </div>
     )
   }

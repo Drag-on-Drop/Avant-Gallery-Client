@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+// Once image is in, maybe separate Links to the image and to the artist
 const ArtCard = props => {
   return (
     <Link to={`/artworks/${props.art._id}`}>
