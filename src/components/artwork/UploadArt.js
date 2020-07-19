@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { addArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 
-import Form from 'react-bootstrap/Form'
+import Form, { File } from 'react-bootstrap/Form'
+// import { File } from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class UploadArt extends Component {
@@ -13,8 +14,7 @@ class UploadArt extends Component {
     this.state = {
       name: '',
       description: '',
-      // price: '',
-      imageUrl: ''
+      imageUrl: null
     }
   }
 
@@ -55,7 +55,7 @@ class UploadArt extends Component {
   }
 
   render () {
-    const { name, description, imageUrl } = this.state
+    const { name, description } = this.state
 
     return (
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
@@ -83,16 +83,22 @@ class UploadArt extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Form.Group controlId="ImgUrl">
-            <Form.Label>Image Url</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="imageUrl"
-              value={imageUrl}
-              placeholder="Enter Image Url"
-              onChange={this.handleChange}
-            />
+          {/* // <Form.Group controlId="ImgUrl">
+          //   <Form.Label>Image Url</Form.Label>
+          //   <Form.Control
+          //     required
+          //     type="text"
+          //     name="imageUrl"
+          //     value={imageUrl}
+          //     placeholder="Enter Image Url"
+          //     onChange={this.handleChange}
+          //   />
+          // </Form.Group> */}
+          <Form.Group>
+            <File id="imageUrl">
+              <Form.Label>Choose Art to upload</Form.Label>
+              <File.Input />
+            </File>
           </Form.Group>
           <Button
             variant="dark"

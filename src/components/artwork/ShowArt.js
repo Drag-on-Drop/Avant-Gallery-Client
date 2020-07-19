@@ -58,7 +58,8 @@ class ShowArt extends Component {
     // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
-        <a href={imageUrl}>{imageUrl}</a>
+        <img src={imageUrl}/>
+        <a href={imageUrl}>Download</a>
         <p>{name}, by <Link to={`/artists/${owner._id}`}>
           {owner.name}
         </Link>
