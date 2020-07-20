@@ -9,13 +9,17 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
 
     this.state = {
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography
+      // user: this.props.user,
+      // name: this.props.user.name,
+      // location: this.props.user.location,
+      // biography: this.props.user.biography
+      name: '',
+      location: '',
+      biography: ''
     }
   }
 
@@ -24,11 +28,15 @@ class UpdateArtist extends Component {
 
   onUpdateArtist = event => {
     event.preventDefault()
-
-    const { msgAlert, history, user } = this.props
-
+    console.log('props??', this.props)
+    const { msgAlert, history, user, setUser } = this.props
+    console.log('setUser?', setUser)
     updateArtist(this.state, user)
-      // .then(console.log(user, 'what is user'))
+      .then(() => {
+        console.log('before user', user)
+        setUser({ name: this.state.name })
+        console.log('after user', user)
+      })
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
@@ -77,7 +85,6 @@ class UpdateArtist extends Component {
           <Form.Group controlId="Biography">
             <Form.Label>Biography</Form.Label>
             <Form.Control
-
               name="biography"
               value={this.state.biography}
               type="string"
