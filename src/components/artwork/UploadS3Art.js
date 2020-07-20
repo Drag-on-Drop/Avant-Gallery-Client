@@ -20,7 +20,7 @@ function UploadS3Art (props) {
       <label>
       Image Title
         <input type="text" value={name}
-          onChange={(event) => { setName(event.targetvalue) }}
+          onChange={(event) => { setName(event.target.value) }}
           placeholder="give a title to your upload" />
       </label>
 

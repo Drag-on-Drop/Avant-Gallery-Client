@@ -46,7 +46,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    const { name, location, biography } = this.state
+    // const { name, location, biography } = this.state
 
     return (
       // <div className="row">
@@ -57,9 +57,8 @@ class UpdateArtist extends Component {
           <Form.Group controlId="Name">
             <Form.Label>Name</Form.Label>
             <Form.Control
-
               name="name"
-              value={name}
+              value={this.state.name}
               type="string"
               placeholder="Name"
               onChange={this.handleChange}
@@ -68,9 +67,8 @@ class UpdateArtist extends Component {
           <Form.Group controlId="location">
             <Form.Label>Location</Form.Label>
             <Form.Control
-
               name="location"
-              value={location}
+              value={this.state.location}
               type="string"
               placeholder="Location"
               onChange={this.handleChange}
@@ -81,7 +79,7 @@ class UpdateArtist extends Component {
             <Form.Control
 
               name="biography"
-              value={biography}
+              value={this.state.biography}
               type="string"
               placeholder="Biography"
               as="textarea"
