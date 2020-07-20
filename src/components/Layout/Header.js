@@ -2,15 +2,16 @@ import React, { Fragment } from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
-const authenticatedOptions = (
-  <Fragment>
-    <Nav.Link href="#change-password">Change Password</Nav.Link>
-    <Nav.Link href="#sign-out">Sign Out</Nav.Link>
-    <Nav.Link href="#update-artist">Update Artist</Nav.Link>
-    <Nav.Link href="#upload-art">Upload Art</Nav.Link>
-    <Nav.Link href="#view-artists">View Artists</Nav.Link>
-  </Fragment>
-)
+const authenticatedOptions = (user) => {
+  return (
+    <Fragment>
+      <Nav.Link href="#upload-art">Upload Art</Nav.Link>
+      <Nav.Link href={`#artists/${user._id}`}>My Profile</Nav.Link>
+      <Nav.Link href="#user-settings">User Settings</Nav.Link>
+      <Nav.Link href="#sign-out">Sign Out</Nav.Link>
+    </Fragment>
+  )
+}
 
 const unauthenticatedOptions = (
   <Fragment>
@@ -22,20 +23,22 @@ const unauthenticatedOptions = (
 const alwaysOptions = (
   <Fragment>
     <Nav.Link href="#/">Home</Nav.Link>
+    <Nav.Link href="#artworks">Art</Nav.Link>
+    <Nav.Link href="#view-artists">Artists</Nav.Link>
   </Fragment>
 )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
+  <Navbar bg="dark" variant="dark" expand="md">
     <Navbar.Brand href="#">
-      Avant G&apos;ART
+      Gallery d&apos;Art
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ml-auto">
         { user && <span className="navbar-text mr-2">Welcome, {user.email}</span>}
         { alwaysOptions }
-        { user ? authenticatedOptions : unauthenticatedOptions }
+        { user ? authenticatedOptions(user) : unauthenticatedOptions }
       </Nav>
     </Navbar.Collapse>
   </Navbar>

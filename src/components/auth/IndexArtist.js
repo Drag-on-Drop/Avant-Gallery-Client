@@ -2,56 +2,66 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { indexArtist } from '../../api/artist'
 import messages from '../AutoDismissAlert/messages'
+import { ListGroup } from 'react-bootstrap'
 
 class IndexArtist extends Component {
   constructor () {
     super()
     this.state = {
-      artists: null
+      artists: null,
+      notFound: false
     }
   }
-  onIndexArtist = event => {
-    event.preventDefault()
+
+  componentDidMount () {
     const { msgAlert } = this.props
     indexArtist()
-      .then(() => msgAlert({
-        heading: 'Update Artist Success',
-        message: messages.updateArtistSuccess,
-        variant: 'success'
-      }))
       .then((res) => {
         this.setState({
-          artists: res.data.artist
+          artists: res.data.artists,
+          notFound: false
         })
       })
       .catch(error => {
         console.log(error)
+        this.setState({
+          artists: null,
+          notFound: true
+        })
+        msgAlert({
+          heading: 'Could not reach Server',
+          message: messages.indexArtistFailure,
+          variant: 'success'
+        })
       })
   }
+
   render () {
     let jsx
-    if (this.state.artists === null) {
+    if (this.state.notFound) {
+      jsx = <p>Cannot connect to server.</p>
+    } else if (this.state.artists === null) {
       jsx = <p>Loading... </p>
-    } else if (this.state.books.length === 0) {
+    } else if (this.state.artists.length === 0) {
       jsx = <p>No artists</p>
     } else {
       jsx = (
-        <ul>
+        <ListGroup>
           {this.state.artists.map(artist => {
             return (
-              <li key={artist._id}>
+              <ListGroup.Item key={artist._id}>
                 <Link to={`/artists/${artist._id}`}>
                   {artist.name}
                 </Link>
-              </li>
+              </ListGroup.Item>
             )
           })}
-        </ul>
+        </ListGroup>
       )
     }
     return (
       <div>
-        <h2>Artist Page</h2>
+        <h3>Artists</h3>
         {jsx}
       </div>
     )

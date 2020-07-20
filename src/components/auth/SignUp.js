@@ -13,8 +13,6 @@ class SignUp extends Component {
 
     this.state = {
       name: '',
-      location: '',
-      biography: '',
       email: '',
       password: '',
       passwordConfirmation: ''
@@ -32,13 +30,19 @@ class SignUp extends Component {
 
     signUp(this.state)
       .then(() => signIn(this.state))
-      .then(res => setUser(res.data.user))
-      .then(() => msgAlert({
-        heading: 'Sign Up Success',
-        message: messages.signUpSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push('/'))
+      .then(res => {
+        setUser(res.data.user)
+        return res.data.user
+      })
+      .then(user => {
+        msgAlert({
+          heading: 'Sign Up Success',
+          message: messages.signUpSuccess,
+          variant: 'success'
+        })
+        return user
+      })
+      .then(user => history.push(`/artists/${user._id}`))
       .catch(error => {
         this.setState({ email: '', password: '', passwordConfirmation: '' })
         msgAlert({
@@ -50,7 +54,7 @@ class SignUp extends Component {
   }
 
   render () {
-    const { name, location, biography, email, password, passwordConfirmation } = this.state
+    const { name, email, password, passwordConfirmation } = this.state
 
     return (
       <div className="row">
@@ -65,28 +69,6 @@ class SignUp extends Component {
                 name="name"
                 value={name}
                 placeholder="Enter name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="location">
-              <Form.Label>Location (optional)</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="location"
-                value={location}
-                placeholder="Enter location"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="biography">
-              <Form.Label>Biography (optional)</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="biography"
-                value={biography}
-                placeholder="Enter biography"
                 onChange={this.handleChange}
               />
             </Form.Group>
@@ -124,8 +106,9 @@ class SignUp extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="dark"
               type="submit"
+              size="sm"
             >
               Submit
             </Button>

@@ -23,7 +23,7 @@ class SignIn extends Component {
 
   onSignIn = event => {
     event.preventDefault()
-
+    console.log('sign in, props?', this.props)
     const { msgAlert, history, setUser } = this.props
 
     signIn(this.state)
@@ -75,8 +75,9 @@ class SignIn extends Component {
               />
             </Form.Group>
             <Button
-              variant="primary"
+              variant="dark"
               type="submit"
+              size="sm"
             >
               Submit
             </Button>

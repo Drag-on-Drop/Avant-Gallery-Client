@@ -6,28 +6,35 @@ import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+// import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-  constructor () {
-    super()
 
+  constructor (props) {
+    super(props)
+    console.log('props are:', props)
     this.state = {
+      // user: this.props.user,
+      // name: this.props.user.name,
+      // location: this.props.user.location,
+      // biography: this.props.user.biography
       name: '',
       location: '',
       biography: ''
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => this.setState({ [event.target.name]: event.target.value })
 
   onUpdateArtist = event => {
     event.preventDefault()
-
-    const { msgAlert, history, user } = this.props
-
+    console.log('props deconstructed:', this.props)
+    const { msgAlert, history, setUser, user } = this.props
+    console.log('setUser is:', setUser)
     updateArtist(this.state, user)
+      // .then(() => setUser(this.state.user))
+      // .then(() => console.log('user is:', user))
+      // .then(() => console.log('state is:', this.state))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
@@ -35,7 +42,7 @@ class UpdateArtist extends Component {
       }))
       .then(() => history.push('/'))
       .catch(error => {
-        this.setState({ name: '', location: '', biography: '' })
+        this.setState({ name: '', location: '', biography: '', email: '' })
         msgAlert({
           heading: 'Update Artist Failed with error: ' + error.message,
           message: messages.updateArtistFailure,
@@ -45,55 +52,56 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    const { name, location, biography } = this.state
+    // const { name, location, biography } = this.state
 
     return (
-      <div className="row">
-        <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Update Artist</h3>
-          <Form onSubmit={this.onUpdateArtist}>
-            <Form.Group controlId="Name">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-
-                name="name"
-                value={name}
-                type="string"
-                placeholder="Name"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="location">
-              <Form.Label>Location</Form.Label>
-              <Form.Control
-
-                name="location"
-                value={location}
-                type="string"
-                placeholder="Location"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group controlId="Biography">
-              <Form.Label>Biography</Form.Label>
-              <Form.Control
-
-                name="biography"
-                value={biography}
-                type="string"
-                placeholder="Biography"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Button
-              variant="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
-          </Form>
-        </div>
+      // <div className="row">
+      // <div className="col-sm-10 col-md-8 mx-auto mt-5">
+      <div className="col-sm-10 col-md-6 mx-auto mt-5">
+        <h3>Update Artist</h3>
+        <Form onSubmit={this.onUpdateArtist}>
+          <Form.Group controlId="Name">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              name="name"
+              value={this.state.name}
+              type="string"
+              placeholder="Name"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="location">
+            <Form.Label>Location</Form.Label>
+            <Form.Control
+              name="location"
+              value={this.state.location}
+              type="string"
+              placeholder="Location"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="Biography">
+            <Form.Label>Biography</Form.Label>
+            <Form.Control
+              name="biography"
+              value={this.state.biography}
+              type="string"
+              placeholder="Biography"
+              as="textarea"
+              onChange={this.handleChange}
+            />
+          </Form.Group>
+          <Button
+            variant="dark"
+            type="submit"
+            size="sm"
+          >
+            Submit
+          </Button>
+        </Form>
       </div>
+      // </div>
+      // </div>
     )
   }
 }

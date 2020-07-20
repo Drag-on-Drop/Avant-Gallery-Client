@@ -4,15 +4,18 @@ import { Route } from 'react-router-dom'
 import AuthenticatedRoute from './AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
 import Header from './Layout/Header'
+import Footer from './Layout/Footer'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
-import ChangePassword from './auth/ChangePassword'
-
 import UpdateArtist from './auth/UpdateArtist'
-import IndexArtist from './auth/IndexArtist'
-import UploadArt from './artwork/UploadArt'
+// import UploadArt from './artwork/UploadArt'
+import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
+import IndexArt from './artwork/IndexArt'
+import IndexArtist from './auth/IndexArtist'
+import ShowArtist from './Layout/ShowArtist'
+import UploadS3Art from './artwork/UploadS3Art'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -60,30 +63,36 @@ class App extends Component {
           <Route path='/sign-in' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route user={user} path='/view-artists' render={() => (
-            <IndexArtist msgAlert={this.msgAlert} />
-          )} />
           <AuthenticatedRoute user={user} path='/sign-out' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/change-password' render={() => (
-            <ChangePassword msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute user={user} path='/user-settings' render={() => (
+            <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/update-artist' render={() => (
-            <UpdateArtist msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
+            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
           <AuthenticatedRoute user={user} path='/upload-art' render={() => (
-            <UploadArt
+            <UploadS3Art
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />
           )} />
           <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} msgAlert={this.msgAlert} />
+            <ShowArt {...props} user={user} msgAlert={this.msgAlert} />
+          )} />
+          <Route exact path='/artworks' render={(props) => (
+            <IndexArt {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
+          <Route path='/artists/:id' render={(props) => (
+            <ShowArtist {...props} msgAlert={this.msgAlert} />
+          )} />
         </main>
+        <Footer />
       </Fragment>
     )
   }
