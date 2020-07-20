@@ -9,9 +9,10 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-  constructor () {
-    super()
 
+  constructor (props) {
+    super(props)
+    console.log('props are:', props)
     this.state = {
       // user: this.props.user,
       // name: this.props.user.name,
@@ -23,20 +24,17 @@ class UpdateArtist extends Component {
     }
   }
 
-  handleChange = event => this.setState({ [event.target.name]: event.target.value
-  })
+  handleChange = event => this.setState({ [event.target.name]: event.target.value })
 
   onUpdateArtist = event => {
     event.preventDefault()
-    console.log('props??', this.props)
-    const { msgAlert, history, user, setUser } = this.props
-    console.log('setUser?', setUser)
+    console.log('props deconstructed:', this.props)
+    const { msgAlert, history, setUser, user } = this.props
+    console.log('setUser is:', setUser)
     updateArtist(this.state, user)
-      .then(() => {
-        console.log('before user', user)
-        setUser({ name: this.state.name })
-        console.log('after user', user)
-      })
+      // .then(() => setUser(this.state.user))
+      // .then(() => console.log('user is:', user))
+      // .then(() => console.log('state is:', this.state))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,

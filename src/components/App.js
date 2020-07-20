@@ -69,8 +69,8 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/user-settings' render={() => (
             <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/update-artist' render={() => (
-            <UpdateArtist msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
+          <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
+            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
@@ -82,13 +82,13 @@ class App extends Component {
               user={user} />
           )} />
           <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} msgAlert={this.msgAlert} />
+            <ShowArt {...props} user={user} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/artworks' render={(props) => (
-            <IndexArt {...props} msgAlert={this.msgAlert} />
+            <IndexArt {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
-          <Route exact path='/artists/:id' render={(props) => (
+          <Route path='/artists/:id' render={(props) => (
             <ShowArtist {...props} msgAlert={this.msgAlert} />
           )} />
         </main>

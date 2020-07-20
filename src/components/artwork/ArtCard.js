@@ -9,7 +9,7 @@ const ArtCard = props => {
         <Card.Img variant="top" src={props.art.imageUrl} />
         <Card.Body>
           <Card.Title>{props.art.name}</Card.Title>
-          <Card.Text>{props.art.owner.name}</Card.Text>
+          <Card.Text>by {props.art.owner.name}</Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Posted at {props.art.createdAt}</small>
