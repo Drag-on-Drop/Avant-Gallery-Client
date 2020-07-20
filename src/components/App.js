@@ -9,12 +9,13 @@ import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
 import UpdateArtist from './auth/UpdateArtist'
-import UploadArt from './artwork/UploadArt'
+// import UploadArt from './artwork/UploadArt'
 import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
 import IndexArtist from './auth/IndexArtist'
 import ShowArtist from './Layout/ShowArtist'
+import UploadS3Art from './artwork/UploadS3Art'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -75,7 +76,7 @@ class App extends Component {
           )} />
           {/* Need user prop to declare owner of art? */}
           <AuthenticatedRoute user={user} path='/upload-art' render={() => (
-            <UploadArt
+            <UploadS3Art
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />
