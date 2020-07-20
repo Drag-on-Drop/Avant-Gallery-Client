@@ -16,7 +16,7 @@ export default {
   artDeleteFailure: 'An error occured, unable to delete this submission.',
   artEditSuccess: 'Submission successfully edited.',
   artEditFailure: 'An error occured, unable to edit this submission. Please try again.',
-
+  showUserSuccess: 'Viola les Artists',
   // User messaging:
   showUserFailure: 'An error occured, unable to show user.'
 }

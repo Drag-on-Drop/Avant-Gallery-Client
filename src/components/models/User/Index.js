@@ -22,8 +22,8 @@ class IndexUser extends Component {
         })
       })
       .then(() => msgAlert({
-        heading: 'Update User Success',
-        message: messages.updateUserSuccess,
+        heading: 'Artists de Gallery',
+        message: messages.showUserSuccess,
         variant: 'success'
       }))
       .catch(error => {
@@ -49,7 +49,7 @@ class IndexUser extends Component {
           {this.state.users.map(user => {
             return (
               <p key={user._id}>
-                <Link to={`/artists/${user._id}`}>
+                <Link to={`/artists/${user._id}`} replace >
                   {user.name}
                 </Link>
               </p>

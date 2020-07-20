@@ -1,20 +1,22 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const patchUser = (user) => {
-  // console.log('what is user', user._id)
+export const patchUser = (state, user) => {
+  // console.log('what is user', user)
+  // console.log('what is id', id)
+  // console.log('this is the token', user.token)
   return axios({
-    url: apiUrl + '/patch-user',
+    url: apiUrl + `/artists/${user._id}/patch`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
     data: {
       credentials: {
-        name: user.name,
-        location: user.location,
-        biography: user.biography,
-        email: user.email
+        name: state.name,
+        location: state.location,
+        biography: state.biography,
+        email: state.email
       }
     }
   })

@@ -7,18 +7,17 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class PatchUser extends Component {
-  constructor () {
-    super()
-
+  constructor (props) {
+    super(props)
+    console.log('props:', props)
     this.state = {
-      name: '',
-      location: '',
-      biography: ''
+      name: this.props.user.name,
+      location: this.props.user.location,
+      biography: this.props.user.biography
     }
   }
 
-  handleChange = event => this.setState({ [event.target.name]: event.target.value
-  })
+  handleChange = event => this.setState({ [event.target.name]: event.target.value })
 
   // handleChange = event => {
   //   this.setState({ [event.target.name]: event.target.value })
@@ -29,11 +28,13 @@ class PatchUser extends Component {
     event.preventDefault()
 
     const { msgAlert, history, user } = this.props
-
-    patchUser(this.state, user)
+    const id = this.props.match.params.id
+    console.log('state is:', this.state)
+    console.log('user is:', this.props.user)
+    patchUser(this.state, user, id)
       // .then(console.log(user, 'what is user'))
       .then(() => msgAlert({
-        heading: 'Update User Success',
+        heading: 'Profile updated successfully',
         message: messages.updateUserSuccess,
         variant: 'success'
       }))

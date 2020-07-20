@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { getUser } from '../../../api/user'
 import messages from '../../Alerts/messages'
 import { CardColumns, Card } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class GetUser extends Component {
   constructor (props) {
@@ -80,7 +81,11 @@ class GetUser extends Component {
               </Card>
             ))}
           </CardColumns>
+          <Link to={`/artists/${this.props.match.params.id}/patch`}>
+            <button>Edit Profile</button>
+          </Link>
         </div>
+
       </React.Fragment>
     )
   }

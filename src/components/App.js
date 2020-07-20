@@ -71,7 +71,7 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/update-user' render={() => (
             <PatchUser msgAlert={this.msgAlert} user={user} />
           )} />
-          <Route user={user} path='/artists' render={() => (<IndexUser msgAlert={this.msgAlert} />
+          <Route user={user} exact path='/artists' render={() => (<IndexUser msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of image? */}
           <AuthenticatedRoute user={user} path='/upload-image' render={() => (
@@ -89,6 +89,9 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route exact path='/artists/:id' render={(props) => (
             <GetUser {...props} msgAlert={this.msgAlert} />
+          )} />
+          <Route exact path='/artists/:id/patch' render={(props) => (
+            <PatchUser {...props} user={user} msgAlert={this.msgAlert} />
           )} />
         </main>
         <Footer />
