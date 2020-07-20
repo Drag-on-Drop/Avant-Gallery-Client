@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-
   constructor (props) {
     super(props)
     console.log('props are:', props)
