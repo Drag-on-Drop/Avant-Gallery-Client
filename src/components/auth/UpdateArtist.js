@@ -6,9 +6,9 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class UpdateArtist extends Component {
-  constructor () {
-    super()
-
+  constructor (props) {
+    super(props)
+    console.log('props are:', props)
     this.state = {
       // user: this.props.user,
       // name: this.props.user.name,
