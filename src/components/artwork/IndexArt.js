@@ -18,6 +18,7 @@ class IndexArt extends Component {
       .then(response => this.setState({
         artworks: response.data.artworks
       }))
+      .then(console.log('user logged in is:', this.props.user))
       .catch(error => {
         this.setState({
           artworks: null
@@ -39,7 +40,6 @@ class IndexArt extends Component {
         </div>
       )
     }
-
     return (
       <div>
         <br/>

@@ -13,8 +13,10 @@ class DestroyArt extends Component {
   }
 
   onDelete = event => {
-    const { art, user, history, msgAlert } = this.props
-    deleteArtwork(art.id, user)
+    const { user, history, msgAlert } = this.props
+    console.log('the props are ', this.props)
+    console.log('the user prop is', this.props.user)
+    deleteArtwork(this.props.match.params.id, user)
       .then(() => {
         this.setState({ destroyed: true })
         msgAlert({
