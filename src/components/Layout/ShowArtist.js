@@ -8,7 +8,10 @@ class ShowArtist extends Component {
   constructor (props) {
     super(props)
 
-    this.state = { artist: null }
+    this.state = {
+      artist: null,
+      artworks: null
+    }
   }
 
   componentDidMount () {
@@ -52,6 +55,11 @@ class ShowArtist extends Component {
       )
     }
 
+    let artCards = ''
+    if (this.state.artworks) {
+      artCards = <ArtCardColumns artList={this.state.artworks} />
+    }
+
     const { name, location, biography } = this.state.artist
 
     return (
@@ -63,7 +71,7 @@ class ShowArtist extends Component {
           <br />
           <p>{biography}</p>
         </div>
-        <ArtCardColumns artList={this.state.artist.artwork} />
+        {artCards}
       </React.Fragment>
     )
   }
