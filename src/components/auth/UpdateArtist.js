@@ -9,13 +9,16 @@ import Button from 'react-bootstrap/Button'
 // import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
-  constructor (props) {
-    super(props)
-    console.log('props are:', props)
+  constructor () {
+    super()
+    console.log('props are:', this.props)
     this.state = {
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography
+      // name: this.props.user.name,
+      // location: this.props.user.location,
+      // biography: this.props.user.biography
+      name: '',
+      location: '',
+      biography: ''
     }
   }
 
@@ -23,13 +26,9 @@ class UpdateArtist extends Component {
 
   onUpdateArtist = event => {
     event.preventDefault()
-    console.log('props deconstructed:', this.props)
     const { msgAlert, history, setUser, user } = this.props
     console.log('setUser is:', setUser)
     updateArtist(this.state, user)
-      // .then(() => setUser(this.state.user))
-      // .then(() => console.log('user is:', user))
-      // .then(() => console.log('state is:', this.state))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,

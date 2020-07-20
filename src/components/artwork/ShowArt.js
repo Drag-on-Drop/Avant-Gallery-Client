@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import DestroyArt from './DestroyArt'
+import Button from 'react-bootstrap/Button'
 
 class ShowArt extends Component {
   constructor (props) {
@@ -18,14 +19,16 @@ class ShowArt extends Component {
 
   componentDidMount () {
     showArtwork(this.props.match.params.id)
-      .then(response => {
-        console.log(response)
+      .then(res => {
+        console.log(res)
         this.setState({
-          art: response.data.artwork,
+          art: res.data.artwork,
           notFound: false
         })
-        // console.log('the owner id inside the state is:', this.state.art.owner._id)
+        console.log('art is:', this.state.art)
+        console.log('setArt is:', this.props.setArt)
       })
+      .then(() => this.props.setArt(this.state.art))
       .catch(error => {
         this.setState({
           art: null,
@@ -76,6 +79,9 @@ class ShowArt extends Component {
         <p>Biography: {owner.biography}</p>
         <p>Posted on: {createdAt}</p>
         < DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+        <Link to={`/artwork/${this.props.match.params.id}/patch`}>
+          <Button variant="info">Edit Artwork</Button>
+        </Link>
       </div>
     )
   }
