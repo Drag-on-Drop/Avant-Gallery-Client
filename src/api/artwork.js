@@ -12,6 +12,19 @@ export const addArtwork = (formData, user) => {
   })
 }
 
+// s3 upload
+export const addS3Artwork = (contentType, formData, user) => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/post-artwork',
+    headers: {
+      'Authorization': `Token token=${user.token}`,
+      'Content-Type': contentType
+    },
+    data: formData
+  })
+}
+
 export const showArtwork = (artId) => {
   return axios({
     url: apiUrl + `/artworks/${artId}`,

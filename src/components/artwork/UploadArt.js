@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { addArtwork } from '../../api/artwork'
+import { addS3Artwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 
-import Form, { File } from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form'
 // import { File } from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
@@ -21,9 +21,17 @@ class UploadArt extends Component {
   handleChange = event => {
     // const editedField =
     // Object.assign({}, this.state, editedField)
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+    if (event.target.files) {
+      console.log(event.target.files, 'what is event.target.files')
+      this.setState({
+        imageUrl: event.target.files[0]
+      })
+      console.log(this.state.imageUrl, 'what is state image url')
+    } else {
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
   }
 
   createArt = event => {
@@ -32,7 +40,12 @@ class UploadArt extends Component {
     const { msgAlert, history, setArt, user } = this.props
     let link = ''
 
-    addArtwork({ artwork: this.state }, user)
+    const formData = new FormData()
+    formData.append('name', this.state.name)
+    formData.append('imageUrl', this.state.imageUrl)
+    formData.append('description', this.state.description)
+
+    addS3Artwork('multipart/form-data', formData, user)
       .then(res => {
         link = res.data.artwork._id
         setArt(res.data.artwork)
@@ -83,22 +96,15 @@ class UploadArt extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          {/* // <Form.Group controlId="ImgUrl">
-          //   <Form.Label>Image Url</Form.Label>
-          //   <Form.Control
-          //     required
-          //     type="text"
-          //     name="imageUrl"
-          //     value={imageUrl}
-          //     placeholder="Enter Image Url"
-          //     onChange={this.handleChange}
-          //   />
-          // </Form.Group> */}
-          <Form.Group>
-            <File id="imageUrl">
-              <Form.Label>Choose Art to upload</Form.Label>
-              <File.Input />
-            </File>
+          <Form.Group controlId="ImgUrl">
+            <Form.Label>Image Url</Form.Label>
+            <Form.Control
+              required
+              type="file"
+              name="imageUrl"
+              placeholder="Enter Image Url"
+              onChange={this.handleChange}
+            />
           </Form.Group>
           <Button
             variant="dark"
