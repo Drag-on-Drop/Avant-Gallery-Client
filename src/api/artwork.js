@@ -39,6 +39,12 @@ export const indexArtwork = () => {
   })
 }
 
+export const showArtistArt = (artistId) => {
+  return axios({
+    url: apiUrl + `/artworks/user/${artistId}`
+  })
+}
+
 // export const indexArtistArtwork = (artistId) => {
 //   return axios({
 //     url: apiUrl + `/artworks/${artistId}`,

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { showArtist } from '../../api/artist-api'
+import { showArtistArt } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import ArtCardColumns from './../artwork/ArtCardColumns'
 
@@ -18,9 +19,10 @@ class ShowArtist extends Component {
     const id = this.props.match.params.id
     showArtist(id)
       .then(response => {
-        console.log(response)
+        console.log('show artist', response)
         this.setState({
           artist: response.data.artist,
+          artworks: response.data.artworks,
           notFound: false
         })
       })
@@ -33,6 +35,26 @@ class ShowArtist extends Component {
         this.props.msgAlert({
           heading: 'Could not find that artist: ' + error.message,
           message: messages.showArtistFailure,
+          variant: 'danger'
+        })
+      })
+    // get art by this user
+    showArtistArt(id)
+      .then(response => {
+        console.log('show artist art', response)
+        this.setState({
+          artworks: response.data.artworks
+        })
+        console.log('state', this.state)
+      })
+      .catch(error => {
+        this.setState({
+          artworks: null
+        })
+        console.error(error)
+        this.props.msgAlert({
+          heading: 'Could not retrieve art for this artist: ' + error.message,
+          message: messages.showArtistArtFailure,
           variant: 'danger'
         })
       })
@@ -56,6 +78,7 @@ class ShowArtist extends Component {
     }
 
     let artCards = ''
+    console.log('artworks:', this.state.artworks)
     if (this.state.artworks) {
       artCards = <ArtCardColumns artList={this.state.artworks} />
     }

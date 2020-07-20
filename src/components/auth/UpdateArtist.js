@@ -6,13 +6,17 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class UpdateArtist extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
 
     this.state = {
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography
+      // user: this.props.user,
+      // name: this.props.user.name,
+      // location: this.props.user.location,
+      // biography: this.props.user.biography
+      name: '',
+      location: '',
+      biography: ''
     }
   }
 
@@ -69,7 +73,6 @@ class UpdateArtist extends Component {
           <Form.Group controlId="Biography">
             <Form.Label>Biography</Form.Label>
             <Form.Control
-
               name="biography"
               value={this.state.biography}
               type="string"

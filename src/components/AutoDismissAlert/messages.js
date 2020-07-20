@@ -19,5 +19,6 @@ export default {
 
   // Artist messaging:
   showArtistFailure: 'An error occured, unable to show artist.',
-  indexArtistFailure: 'An error occured, unable to get artist list.'
+  indexArtistFailure: 'An error occured, unable to get artist list.',
+  showArtistArtFailure: 'An error occured, unable to show this artist\'s art'
 }
