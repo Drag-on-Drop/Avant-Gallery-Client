@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
+import DestroyArt from './DestroyArt'
 
 class ShowArt extends Component {
   constructor (props) {
     super(props)
+    console.log('initial props are', this.props)
+    console.log('initial user is', this.props.user)
 
     this.state = {
       art: null,
@@ -21,6 +24,7 @@ class ShowArt extends Component {
           art: response.data.artwork,
           notFound: false
         })
+        // console.log('the owner id inside the state is:', this.state.art.owner._id)
       })
       .catch(error => {
         this.setState({
@@ -37,6 +41,8 @@ class ShowArt extends Component {
   }
 
   render () {
+    console.log('user inside render is', this.props.user)
+    // console.log('inside render the owner id inside the state is:', this.state.art)
     if (!this.state.art && !this.state.notFound) {
       return (
         <div className="loading-art">
@@ -58,13 +64,18 @@ class ShowArt extends Component {
     // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
-        <a href={imageUrl}>{imageUrl}</a>
-        <p>{name}, by {owner.name}</p>
+        <img src={imageUrl}/>
+        <a href={imageUrl}>Download</a>
+        <p>{name}, by <Link to={`/artists/${owner._id}`}>
+          {owner.name}
+        </Link>
+        </p>
         <p>Description: {description}</p>
         <p>Email: {owner.email}</p>
         <p>Location: {owner.location}</p>
         <p>Biography: {owner.biography}</p>
         <p>Posted on: {createdAt}</p>
+        < DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
       </div>
     )
   }

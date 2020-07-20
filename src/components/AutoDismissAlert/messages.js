@@ -18,5 +18,6 @@ export default {
   artEditFailure: 'An error occured, unable to edit this submission. Please try again.',
 
   // Artist messaging:
-  showArtistFailure: 'An error occured, unable to show artist.'
+  showArtistFailure: 'An error occured, unable to show artist.',
+  indexArtistFailure: 'An error occured, unable to get artist list.'
 }

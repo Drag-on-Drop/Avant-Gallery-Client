@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { indexArtwork } from '../../api/artwork'
+import ArtCardColumns from './ArtCardColumns'
 import messages from '../AutoDismissAlert/messages'
-
-import { CardColumns, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 
 class IndexArt extends Component {
   constructor (props) {
@@ -13,17 +11,14 @@ class IndexArt extends Component {
       artworks: []
       // pageNumber: 1
     }
-    console.log(props, 'what is props')
   }
 
   componentDidMount () {
     indexArtwork()
-      .then(response => {
-        console.log(response, 'what is response')
-        this.setState({
-          artworks: response.data.artworks
-        })
-      })
+      .then(response => this.setState({
+        artworks: response.data.artworks
+      }))
+      .then(console.log('user logged in is:', this.props.user))
       .catch(error => {
         this.setState({
           artworks: null
@@ -45,26 +40,10 @@ class IndexArt extends Component {
         </div>
       )
     }
-
     return (
       <div>
         <br/>
-        <CardColumns>
-          {this.state.artworks.map((art) => (
-            <Link to={`/artworks/${art._id}`} key={art._id}>
-              <Card>
-                <Card.Img variant="top" src={art.imageUrl} />
-                <Card.Body>
-                  <Card.Title>{art.name}</Card.Title>
-                  <Card.Text>{art.owner.name}</Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <small className="text-muted">Posted at {art.createdAt}</small>
-                </Card.Footer>
-              </Card>
-            </Link>
-          ))}
-        </CardColumns>
+        <ArtCardColumns artList={this.state.artworks} />
       </div>
     )
   }

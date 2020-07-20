@@ -2,20 +2,13 @@ import React, { Component } from 'react'
 
 import { showArtist } from '../../api/artist-api'
 import messages from '../AutoDismissAlert/messages'
-import { CardColumns, Card } from 'react-bootstrap'
+import ArtCardColumns from './../artwork/ArtCardColumns'
 
 class ShowArtist extends Component {
   constructor (props) {
     super(props)
 
     this.state = { artist: null }
-
-  //   this.state = {
-  //     name: null,
-  //     location: null,
-  //     biography: null,
-  //     notFound: null
-  //   }
   }
 
   componentDidMount () {
@@ -24,9 +17,6 @@ class ShowArtist extends Component {
       .then(response => {
         console.log(response)
         this.setState({
-          // name: response.data.artist.name,
-          // location: response.data.artist.location,
-          // biography: response.data.artist.biography,
           artist: response.data.artist,
           notFound: false
         })
@@ -73,23 +63,7 @@ class ShowArtist extends Component {
           <br />
           <p>{biography}</p>
         </div>
-
-        <div>
-          <CardColumns>
-            {this.state.artist.artwork.map((art) => (
-              <Card key={art._id}>
-                <Card.Img variant="top" src={art.imageUrl} />
-                <Card.Body>
-                  <Card.Title>{art.name}</Card.Title>
-                  <Card.Text>{art.owner.name}</Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <small className="text-muted">Posted at {art.createdAt}</small>
-                </Card.Footer>
-              </Card>
-            ))}
-          </CardColumns>
-        </div>
+        <ArtCardColumns artList={this.state.artist.artwork} />
       </React.Fragment>
     )
   }

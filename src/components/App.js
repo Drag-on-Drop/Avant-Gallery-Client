@@ -9,14 +9,13 @@ import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
 import UpdateArtist from './auth/UpdateArtist'
-import UploadArt from './artwork/UploadArt'
+// import UploadArt from './artwork/UploadArt'
 import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
-
 import IndexArtist from './auth/IndexArtist'
-
 import ShowArtist from './Layout/ShowArtist'
+import UploadS3Art from './artwork/UploadS3Art'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -70,26 +69,26 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/user-settings' render={() => (
             <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute user={user} path='/update-artist' render={() => (
-            <UpdateArtist msgAlert={this.msgAlert} user={user} />
+          <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
+            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
           <AuthenticatedRoute user={user} path='/upload-art' render={() => (
-            <UploadArt
+            <UploadS3Art
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />
           )} />
           <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} msgAlert={this.msgAlert} />
+            <ShowArt {...props} user={user} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/artworks' render={(props) => (
-            <IndexArt {...props} msgAlert={this.msgAlert} />
+            <IndexArt {...props} msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/' component={Home} />
-          <Route exact path='/artists/:id' render={(props) => (
+          <Route path='/artists/:id' render={(props) => (
             <ShowArtist {...props} msgAlert={this.msgAlert} />
           )} />
         </main>
