@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { getRecentImages } from '../../api/artwork'
 import { Carousel } from 'react-bootstrap'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
 import { Link } from 'react-router-dom'
+import Col from 'react-bootstrap/Col'
 
 const MainCarousel = () => {
   const [images, setImages] = useState([])
@@ -13,8 +16,9 @@ const MainCarousel = () => {
         {images.map((image) => (
           <Carousel.Item key={image._id}>
             <Link to={`/artworks/${image._id}`}>
-              <img src={image.imageUrl} />
+              <img height={450} width={600} src={image.imageUrl} fluid/>
             </Link>
+            <p style={{ color: 'grey', textAlign: 'right' }}>{image.name}</p>
           </Carousel.Item>
         ))}
       </Carousel>
@@ -29,9 +33,15 @@ const MainCarousel = () => {
   }, [])
 
   return (
-    <div className="main-carousel">
-      {itemize(images)}
-    </div>
+    <Container className="fluid">
+      <Row className="align-me" float="center">
+        <Col xs={2}></Col>
+        <Col>
+          {itemize(images)}
+        </Col>
+        <Col xs={2}></Col>
+      </Row>
+    </Container>
   )
 }
 
