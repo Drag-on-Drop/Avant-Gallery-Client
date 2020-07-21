@@ -12,7 +12,7 @@ const ArtCard = props => {
           <Card.Text>by {props.art.owner.name}</Card.Text>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Posted at {props.art.createdAt}</small>
+          <small className="text-muted">Posted on {(props.art.createdAt).substring(0, 10)}</small>
         </Card.Footer>
       </Card>
     </Link>

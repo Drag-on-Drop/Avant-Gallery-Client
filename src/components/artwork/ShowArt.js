@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import DestroyArt from './DestroyArt'
+import Image from 'react-bootstrap/Image'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 class ShowArt extends Component {
   constructor (props) {
@@ -59,22 +63,25 @@ class ShowArt extends Component {
       )
     }
 
-    const { imageUrl, name, description, owner, createdAt } = this.state.art
+    const { imageUrl, name, description, owner } = this.state.art
 
     // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
-        <img src={imageUrl}/>
+        <br />
+        <Container>
+          <Row justify-center>
+            <Col>
+              <Image src={imageUrl} fluid/>
+            </Col>
+          </Row>
+        </Container>
         <a href={imageUrl}>Download</a>
-        <p>{name}, by <Link to={`/artists/${owner._id}`}>
+        <p>{name} by <Link to={`/artists/${owner._id}`}>
           {owner.name}
         </Link>
         </p>
-        <p>Description: {description}</p>
-        <p>Email: {owner.email}</p>
-        <p>Location: {owner.location}</p>
-        <p>Biography: {owner.biography}</p>
-        <p>Posted on: {createdAt}</p>
+        <p>Desc: {description}</p>
         < DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
       </div>
     )
