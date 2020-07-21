@@ -25,24 +25,21 @@ class UpdateArt extends Component {
   onUpdateArt = event => {
     event.preventDefault()
 
-    const { user, history, msgAlert, setArt, match } = this.props
-
+    const { user, history, msgAlert, match } = this.props
+    console.log('state is:', this.state)
+    console.log('id is:', match.params.id)
+    console.log('user is:', user)
     editArtwork(this.state, match.params.id, user)
-      .then(res => {
-        const artwork = res.data.artwork
-        setArt(artwork)
-        this.setState({
-          name: artwork.name,
-          description: artwork.description,
-          edited: true
-        })
-        msgAlert({
-          heading: 'Edit Success',
-          message: messages.artEditSuccess,
-          variant: 'success'
-        })
-        return artwork
-      })
+      .then(res => this.setState({
+        name: res.data.name,
+        description: res.data.description,
+        edited: true
+      }))
+      .then(() => msgAlert({
+        heading: 'Edit Success',
+        message: messages.artEditSuccess,
+        variant: 'success'
+      }))
       .then(artwork => history.push(`/artworks/${artwork._id}`))
       .catch(error => {
         msgAlert({
