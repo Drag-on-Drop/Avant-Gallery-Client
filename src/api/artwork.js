@@ -64,11 +64,19 @@ export const deleteArtwork = (artId, user) => {
 
 export const editArtwork = (formData, artId, user) => {
   return axios({
-    url: apiUrl + `/artworks/${artId}`,
+    url: apiUrl + `/artworks/${artId}/patch`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token token=${user.token}`
     },
     data: formData
+  })
+}
+
+export const getRecentImages = (num) => {
+  return axios({
+    url: apiUrl + '/artworks/recent',
+    method: 'GET',
+    data: { num: num }
   })
 }

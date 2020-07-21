@@ -1,1 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #fefefb
+}
+
+.carousel-inner img {
+  margin: 0 auto;
+  align-items: center;
+}
