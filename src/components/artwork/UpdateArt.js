@@ -30,17 +30,12 @@ class UpdateArt extends Component {
     console.log('id is:', match.params.id)
     console.log('user is:', user)
     editArtwork(this.state, match.params.id, user)
-      .then(res => this.setState({
-        name: res.data.name,
-        description: res.data.description,
-        edited: true
-      }))
       .then(() => msgAlert({
         heading: 'Edit Success',
         message: messages.artEditSuccess,
         variant: 'success'
       }))
-      .then(artwork => history.push(`/artworks/${artwork._id}`))
+      .then(() => history.push(`/artworks/${this.props.art._id}`))
       .catch(error => {
         msgAlert({
           heading: 'Edit Failure: ' + error.message,
