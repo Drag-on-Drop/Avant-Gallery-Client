@@ -66,7 +66,7 @@ class ShowArt extends Component {
       )
     }
 
-    const { imageUrl, name, description, owner } = this.state.art
+    const { imageUrl, name, description, owner, createdAt } = this.state.art
 
     let ownerButtons = ''
     if (this.props.user && owner._id === this.props.user._id) {
