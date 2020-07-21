@@ -14,12 +14,12 @@ class UpdateArtist extends Component {
     console.log('props are:', props)
     this.state = {
       // user: this.props.user,
-      // name: this.props.user.name,
-      // location: this.props.user.location,
-      // biography: this.props.user.biography
-      name: '',
-      location: '',
-      biography: ''
+      name: this.props.user.name,
+      location: this.props.user.location,
+      biography: this.props.user.biography
+      // name: '',
+      // location: '',
+      // biography: ''
     }
   }
 
@@ -31,7 +31,7 @@ class UpdateArtist extends Component {
     const { msgAlert, history, setUser, user } = this.props
     console.log('setUser is:', setUser)
     updateArtist(this.state, user)
-      // .then(() => setUser(this.state.user))
+      .then(() => setUser(this.state.user))
       // .then(() => console.log('user is:', user))
       // .then(() => console.log('state is:', this.state))
       .then(() => msgAlert({

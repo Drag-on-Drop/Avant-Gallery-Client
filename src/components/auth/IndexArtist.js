@@ -31,7 +31,7 @@ class IndexArtist extends Component {
         msgAlert({
           heading: 'Could not reach Server',
           message: messages.indexArtistFailure,
-          variant: 'success'
+          variant: 'danger'
         })
       })
   }

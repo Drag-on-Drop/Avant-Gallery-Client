@@ -70,7 +70,7 @@ class App extends Component {
             <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
-            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} />
+            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
