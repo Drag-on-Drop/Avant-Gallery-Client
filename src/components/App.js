@@ -16,6 +16,7 @@ import IndexArt from './artwork/IndexArt'
 import IndexArtist from './auth/IndexArtist'
 import ShowArtist from './Layout/ShowArtist'
 import UploadS3Art from './artwork/UploadS3Art'
+import UpdateArt from './artwork/UpdateArt'
 
 // Project Edits
 import Home from './Layout/Home'
@@ -27,7 +28,6 @@ class App extends Component {
     this.state = {
       user: null,
       msgAlerts: [],
-
       art: null
     }
   }
@@ -71,18 +71,20 @@ class App extends Component {
           )} />
           <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
             <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
+
           )} />
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
-          <AuthenticatedRoute user={user} path='/upload-art' render={() => (
+          <AuthenticatedRoute user={user} path='/upload-art' render={(props) => (
             <UploadS3Art
+              {...props}
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />
           )} />
           <Route path='/artworks/:id' render={(props) => (
-            <ShowArt {...props} user={user} msgAlert={this.msgAlert} />
+            <ShowArt {...props} user={user} setArt={this.setArt} msgAlert={this.msgAlert} />
           )} />
           <Route exact path='/artworks' render={(props) => (
             <IndexArt {...props} msgAlert={this.msgAlert} user={user} />
@@ -90,6 +92,9 @@ class App extends Component {
           <Route exact path='/' component={Home} />
           <Route path='/artists/:id' render={(props) => (
             <ShowArtist {...props} msgAlert={this.msgAlert} />
+          )} />
+          <Route exact path='/artwork/:id/patch' render={(props) => (
+            <UpdateArt {...props} art={this.state.art} user={user} msgAlert={this.msgAlert} />
           )} />
         </main>
         <Footer />

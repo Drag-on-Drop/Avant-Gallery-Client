@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 
-import { editArt } from '../../api/artwork'
+import { editArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -9,10 +9,11 @@ import Button from 'react-bootstrap/Button'
 class UpdateArt extends Component {
   constructor (props) {
     super(props)
+    console.log('props are:', props)
 
     this.state = {
-      name: props.artwork.name,
-      description: props.artwork.description,
+      name: this.props.art.name,
+      description: this.props.art.description,
       edited: false
     }
   }
@@ -24,25 +25,17 @@ class UpdateArt extends Component {
   onUpdateArt = event => {
     event.preventDefault()
 
-    const { user, history, msgAlert, setArt } = this.props
-
-    editArt(this.state, user)
-      .then(res => {
-        const artwork = res.data.artwork
-        setArt(artwork)
-        this.setState({
-          name: artwork.name,
-          description: artwork.name,
-          edited: true
-        })
-        msgAlert({
-          heading: 'Edit Success',
-          message: messages.artEditSuccess,
-          variant: 'success'
-        })
-        return artwork
-      })
-      .then(artwork => history.push(`/artworks/${artwork._id}`))
+    const { user, history, msgAlert, match } = this.props
+    console.log('state is:', this.state)
+    console.log('id is:', match.params.id)
+    console.log('user is:', user)
+    editArtwork(this.state, match.params.id, user)
+      .then(() => msgAlert({
+        heading: 'Edit Success',
+        message: messages.artEditSuccess,
+        variant: 'success'
+      }))
+      .then(() => history.push(`/artworks/${this.props.art._id}`))
       .catch(error => {
         msgAlert({
           heading: 'Edit Failure: ' + error.message,

@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 class ShowArt extends Component {
   constructor (props) {
@@ -22,14 +23,16 @@ class ShowArt extends Component {
 
   componentDidMount () {
     showArtwork(this.props.match.params.id)
-      .then(response => {
-        console.log(response)
+      .then(res => {
+        console.log(res)
         this.setState({
-          art: response.data.artwork,
+          art: res.data.artwork,
           notFound: false
         })
-        // console.log('the owner id inside the state is:', this.state.art.owner._id)
+        console.log('art is:', this.state.art)
+        console.log('setArt is:', this.props.setArt)
       })
+      .then(() => this.props.setArt(this.state.art))
       .catch(error => {
         this.setState({
           art: null,
@@ -65,6 +68,16 @@ class ShowArt extends Component {
 
     const { imageUrl, name, description, owner } = this.state.art
 
+    let ownerButtons = ''
+    if (this.props.user && owner._id === this.props.user._id) {
+      ownerButtons = (
+        <Link to={`/artwork/${this.props.match.params.id}/patch`}>
+          <Button variant="info">Edit Artwork</Button>
+        </Link>
+        <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+      )
+    }
+
     // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
@@ -81,8 +94,10 @@ class ShowArt extends Component {
           {owner.name}
         </Link>
         </p>
-        <p>Desc: {description}</p>
-        < DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+        <p>About the art:</p>
+        <p>{description}</p>
+        <small className="text-muted">Posted on {createdAt.substring(0, 10)}</small>
+        {ownerButtons}
       </div>
     )
   }
