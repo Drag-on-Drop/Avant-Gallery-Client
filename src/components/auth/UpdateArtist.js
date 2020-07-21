@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
 import { updateArtist } from '../../api/artist'
 import messages from '../AutoDismissAlert/messages'
-
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-// import Col from 'react-bootstrap/Col'
 
 class UpdateArtist extends Component {
 
@@ -28,18 +25,14 @@ class UpdateArtist extends Component {
 
   onUpdateArtist = event => {
     event.preventDefault()
-    console.log('props deconstructed:', this.props)
-    const { msgAlert, history, setUser, user } = this.props
-    console.log('setUser is:', setUser)
+    const { msgAlert, history, user } = this.props
     updateArtist(this.state, user)
-      // .then(() => setUser(this.state.user))
-      // .then(() => console.log('user is:', user))
-      // .then(() => console.log('state is:', this.state))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
+      // .then(() => setUser({ user: this.state }))
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ name: '', location: '', biography: '', email: '' })
@@ -55,8 +48,6 @@ class UpdateArtist extends Component {
     // const { name, location, biography } = this.state
 
     return (
-      // <div className="row">
-      // <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
         <h3>Update Artist</h3>
         <Form onSubmit={this.onUpdateArtist}>
@@ -91,17 +82,12 @@ class UpdateArtist extends Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button
-            variant="dark"
-            type="submit"
-            size="sm"
-          >
+          <Button variant="dark" type="submit" size="sm">
             Submit
           </Button>
         </Form>
       </div>
-      // </div>
-      // </div>
+
     )
   }
 }
