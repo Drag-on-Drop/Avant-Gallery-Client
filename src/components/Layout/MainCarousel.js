@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getRecentImages } from '../../api/artwork'
 import { Carousel } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const MainCarousel = () => {
   const [images, setImages] = useState([])
@@ -11,7 +12,9 @@ const MainCarousel = () => {
       <Carousel>
         {images.map((image) => (
           <Carousel.Item key={image._id}>
-            <img src={image.imageUrl} />
+            <Link to={`/artworks/${image._id}`}>
+              <img src={image.imageUrl} />
+            </Link>
           </Carousel.Item>
         ))}
       </Carousel>
@@ -27,9 +30,7 @@ const MainCarousel = () => {
 
   return (
     <div className="main-carousel">
-      <Carousel>
-        {itemize(images)}
-      </Carousel>
+      {itemize(images)}
     </div>
   )
 }

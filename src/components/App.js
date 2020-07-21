@@ -75,8 +75,9 @@ class App extends Component {
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
-          <AuthenticatedRoute user={user} path='/upload-art' render={() => (
+          <AuthenticatedRoute user={user} path='/upload-art' render={(props) => (
             <UploadS3Art
+              {...props}
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />
