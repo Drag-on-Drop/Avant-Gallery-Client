@@ -71,10 +71,12 @@ class ShowArt extends Component {
     let ownerButtons = ''
     if (this.props.user && owner._id === this.props.user._id) {
       ownerButtons = (
-        <Link to={`/artwork/${this.props.match.params.id}/patch`}>
-          <Button variant="info">Edit Artwork</Button>
-        </Link>
-        <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+        <div>
+          <Link to={`/artwork/${this.props.match.params.id}/patch`}>
+            <Button variant="info">Edit Artwork</Button>
+          </Link>
+          <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+        </div>
       )
     }
 

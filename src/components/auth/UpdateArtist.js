@@ -26,7 +26,7 @@ class UpdateArtist extends Component {
     event.preventDefault()
     const { msgAlert, history, user } = this.props
     updateArtist(this.state, user)
-      .then(() => setUser(this.state.user))
+      // .then(() => setUser(this.state.user))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
