@@ -39,7 +39,7 @@ class DestroyArt extends Component {
 
   render () {
     return (
-      <Button onClick={this.onDelete}>
+      <Button variant="danger" onClick={this.onDelete}>
         Delete
       </Button>
     )
