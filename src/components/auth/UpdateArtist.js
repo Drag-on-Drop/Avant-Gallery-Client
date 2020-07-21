@@ -6,18 +6,17 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 class UpdateArtist extends Component {
-
   constructor (props) {
     super(props)
     console.log('props are:', props)
     this.state = {
       // user: this.props.user,
-      // name: this.props.user.name,
-      // location: this.props.user.location,
-      // biography: this.props.user.biography
-      name: '',
-      location: '',
-      biography: ''
+      name: this.props.user.name,
+      location: this.props.user.location,
+      biography: this.props.user.biography
+      // name: '',
+      // location: '',
+      // biography: ''
     }
   }
 
@@ -27,6 +26,7 @@ class UpdateArtist extends Component {
     event.preventDefault()
     const { msgAlert, history, user } = this.props
     updateArtist(this.state, user)
+      .then(() => setUser(this.state.user))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,

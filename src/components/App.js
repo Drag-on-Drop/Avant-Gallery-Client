@@ -69,14 +69,16 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/user-settings' render={() => (
             <UserSettings msgAlert={this.msgAlert} user={user} />
           )} />
-          <AuthenticatedRoute path='/update-artist/:id' render={() => (
-            <UpdateArtist msgAlert={this.msgAlert} setUser={this.setUser} user={user} />
+          <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
+            <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
+
           )} />
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
-          <AuthenticatedRoute user={user} path='/upload-art' render={() => (
+          <AuthenticatedRoute user={user} path='/upload-art' render={(props) => (
             <UploadS3Art
+              {...props}
               msgAlert={this.msgAlert}
               setArt={this.setArt}
               user={user} />

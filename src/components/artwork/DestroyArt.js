@@ -31,7 +31,8 @@ class DestroyArt extends Component {
         msgAlert({
           heading: 'Failed to delete: ' +
           error.message,
-          message: messages.artDeleteFailure
+          message: messages.artDeleteFailure,
+          variant: 'danger'
         })
       })
   }

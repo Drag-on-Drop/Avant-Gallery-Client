@@ -64,6 +64,16 @@ class ShowArt extends Component {
 
     const { imageUrl, name, description, owner, createdAt } = this.state.art
 
+    let ownerButtons = ''
+    if (this.props.user && owner._id === this.props.user._id) {
+      ownerButtons = (
+        <Link to={`/artwork/${this.props.match.params.id}/patch`}>
+          <Button variant="info">Edit Artwork</Button>
+        </Link>
+        <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+      )
+    }
+
     // Some of these paragraphs should be pulled into a React component
     return (
       <div className="show-art">
@@ -78,10 +88,7 @@ class ShowArt extends Component {
         <p>Location: {owner.location}</p>
         <p>Biography: {owner.biography}</p>
         <p>Posted on: {createdAt}</p>
-        < DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
-        <Link to={`/artwork/${this.props.match.params.id}/patch`}>
-          <Button variant="info">Edit Artwork</Button>
-        </Link>
+        {ownerButtons}
       </div>
     )
   }
