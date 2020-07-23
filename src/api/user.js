@@ -1,0 +1,89 @@
+import apiUrl from '../apiConfig'
+import axios from 'axios'
+
+export const signUp = credentials => {
+  return axios({
+    method: 'POST',
+    url: apiUrl + '/sign-up',
+    data: {
+      credentials: {
+        name: credentials.name,
+        location: credentials.location,
+        biography: credentials.biography,
+        email: credentials.email,
+        password: credentials.password,
+        password_confirmation: credentials.passwordConfirmation
+      }
+    }
+  })
+}
+
+export const signIn = credentials => {
+  return axios({
+    url: apiUrl + '/sign-in',
+    method: 'POST',
+    data: {
+      credentials: {
+        email: credentials.email,
+        password: credentials.password
+      }
+    }
+  })
+}
+
+export const signOut = user => {
+  return axios({
+    url: apiUrl + '/sign-out',
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    }
+  })
+}
+
+export const changePassword = (passwords, user) => {
+  return axios({
+    url: apiUrl + '/change-password',
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      passwords: {
+        old: passwords.oldPassword,
+        new: passwords.newPassword
+      }
+    }
+  })
+}
+
+export const patchUser = (state, user) => {
+  return axios({
+    url: apiUrl + `/update-user/${user._id}`,
+    method: 'PATCH',
+    headers: {
+      'Authorization': `Token token=${user.token}`
+    },
+    data: {
+      credentials: {
+        name: state.name,
+        location: state.location,
+        biography: state.biography
+      }
+    }
+  })
+}
+
+export const indexUser = () => {
+  return axios({
+    url: apiUrl + '/view-users',
+    method: 'GET'
+  })
+}
+
+export const getUser = (userId) => {
+  return axios({
+    url: apiUrl + `/users/${userId}`,
+    method: 'GET'
+  })
+}
