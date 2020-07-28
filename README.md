@@ -5,7 +5,10 @@
 **[Deployed Client Application](https://drag-on-drop.github.io/Avant-Gallery-Client/#/)**
 
 **Technologies Used**
-CSS, JavaScript, React, React Bootstrap
+- CSS
+- JavaScript
+- React
+- React Bootstrap
 
 **User Stories**
 As an unregistered user I can see the Home Page
