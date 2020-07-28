@@ -1,30 +1,11 @@
 **Gallery D'Art** is a single page application for storing images in a virutal database. This app was inspired by the need for artists to showcase their work in times of social distancing. Images uploaded to the database are shared in the main gallery along side the work of other artists. Viewing an artist profile will give users more details about the artist, their contact information for art inquiries and contract work, and a gallery view featuring all of that artist's work. 
 
-**[Deployed Server Site](https://ancient-garden-56671.herokuapp.com)** |
+**[Deployed Server Application](https://ancient-garden-56671.herokuapp.com)** |
 **[Server Repository](https://github.com/Drag-on-Drop/Avant-Gallery-Server)** |
 **[Deployed Client Application](https://drag-on-drop.github.io/Avant-Gallery-Client/#/)**
 
 **Technologies Used**
-Express, MongoDB, Mongoose
-
-**Server Routes**
-
-|Request Type |     Path            |                 Description        |   Auth    |
-|-------------|---------------------|------------------------------------|-----------|
-| GET         |'/artworks'          | Show all Artworks                  |  Unauth   |
-| GET         |'/artworks/:id'      | View Specific Artwork              |  Unauth   |
-| GET         |'/artworks/recent'   | Return recent artwork for carousel |  Unauth   |
-| GET         |'/artworks/user/:id' | Return artwork exclusivly by a user|  Unauth   |
-| PATCH       |'/artworks/:id/patch'| Edit a user specific Artwork       |  Auth     |
-| POST        |'/post-artwork'      | Upload a piece of artwork          |  Auth     |
-| DELETE      |'/artworks/:id'      | Delete a piece of artwork          |  Auth     |
-| POST        |'/sign-up'           | sign up an account                 |  Unaut    |
-| POST        |'/Sign-in'           | Sign in with an existing account   |  Unuth    |
-| PATCH       |'/change-password'   | User Change Password               |  Auth     |
-| Delete      |'/sign-out'          | User Sign out                      |  Auth     |
-| GET         |'/artists/:id'       | View an Artists profile            |  Unauth   |
-
-
+Bootstrap, JavaScript, React
 
 **Unsolved Problems**
 
@@ -37,9 +18,17 @@ Express, MongoDB, Mongoose
 - remove "dead" code
 - fix update artist bug
 
-**Entitiy Relationship Diagram**
+**Wireframes**
 
 ![Entity Relationship Diagram](https://github.com/Drag-on-Drop/Avant-Gallery-Server/blob/master/Avant%20Gallery%20ERD.PNG "Entity Relationship Diagram")
+
+**User Stores**
+- As an unregistered user I can view the Home Page
+- As an unregistered user I can view uploaded art to the database
+- As an unregistered user I can view uploaded art by a specific Artist
+- As an unregistered user I can create a User Account
+- As a registered/signed in User I can CRUD my images
+- As a registered/signed in User I can edit my User Profile
 
 **Planning, Process and Problem Solving Strategy**
 
