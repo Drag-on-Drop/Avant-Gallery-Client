@@ -1,19 +1,19 @@
-**Avant-Gallery** is an application with basic authentication that allows users to post artwork for other users to view.
+**Gallery D'Art** is a single page application for storing images in a virutal database. This app was inspired by the need for artists to showcase their work in times of social distancing. Images uploaded to the database are shared in the main gallery along side the work of other artists. Viewing an artist profile will give users more details about the artist, their contact information for art inquiries and contract work, and a gallery view featuring all of that artist's work. 
 
-**Link to Server Repository** https://github.com/Drag-on-Drop/Avant-Gallery-Server
-**Link to Heroku Site** https://ancient-garden-56671.herokuapp.com
-**Link to Application** https://drag-on-drop.github.io/Avant-Gallery-Client/#/
+**[Deployed Server Application](https://ancient-garden-56671.herokuapp.com)** |
+**[Server Repository](https://github.com/Drag-on-Drop/Avant-Gallery-Server)** |
+**[Deployed Client Application](https://drag-on-drop.github.io/Avant-Gallery-Client/#/)**
 
 **Technologies Used**
-JavaScript, React, CSS, Sass, React Bootstrap,  
+CSS, JavaScript, React, React Bootstrap
 
 **User Stories**
 As an unregistered user I can see the Home Page
-As an unregistered user I can view all the Collections or Artists
-As an unregistered user I can create an Artist account
-As a registered/signed in Artist I can CRUD my Collection
-As a registered/signed in Artist I can CRUD Art within that Collection
-As a registered/signed in Artist I can edit my Artist Profile
+As an unregistered user I can view images uploaded in the database
+As an unregistered user I can view images uploaded by a specific Artist
+As an unregistered user I can create a User Account
+As a registered/signed in User I can CRUD images
+As a registered/signed in User I can edit my Profile
 
 **Wireframes**
 ![Wireframes](https://github.com/Drag-on-Drop/Avant-Gallery-Client/blob/readMe/Avant%20Gallery%20Wireframes.PNG)
@@ -21,9 +21,16 @@ As a registered/signed in Artist I can edit my Artist Profile
 **Site Flow Diagram**
 ![Site Flow](https://github.com/Drag-on-Drop/Avant-Gallery-Client/blob/readMe/Site%20Flow.PNG)
 
-**Unsolved Problems**
-
-
+**Unsolved Problems & Planned Features**
+- Add image tags to files to allow users to find more images with the same tag
+- CSS formatting, spacing & styling
+- Artist profile features: artist profile picture, main pictures, carousel of featured art
+- About the gallery info section
+- Sign in should redirect the user to their profile
+- Clean up development code
+- Fix: Remove 'by' in artist profile card view
+- Fix: viewing an artist profile won't always populate their work
+- Fix: updating a profile will pre-fill forms with old data despite updating the database
 
 ![Entity Relationship Diagram](https://github.com/Drag-on-Drop/Avant-Gallery-Server/blob/master/Avant%20Gallery%20ERD.PNG "Entity Relationship Diagram")
 
