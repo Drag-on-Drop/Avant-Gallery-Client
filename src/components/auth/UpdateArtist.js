@@ -10,29 +10,43 @@ class UpdateArtist extends Component {
     super(props)
     console.log('props are:', props)
     this.state = {
-      // user: this.props.user,
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography
-      // name: '',
-      // location: '',
-      // biography: ''
+      user: this.props.user
+      // name: this.props.user.name,
+      // location: this.props.user.location,
+      // biography: this.props.user.biography,
+      // _id: this.props.user._id
     }
   }
 
-  handleChange = event => this.setState({ [event.target.name]: event.target.value })
-
+  handleChange = event => {
+    const updatedField = { [event.target.name]: event.target.value }
+    const editedUser = Object.assign(this.state.user, updatedField)
+    this.setState({ user: editedUser })
+  }
   onUpdateArtist = event => {
     event.preventDefault()
-    const { msgAlert, history, user } = this.props
+    const { msgAlert, history, user, setUser } = this.props
     updateArtist(this.state, user)
       // .then(() => setUser(this.state.user))
+      .then(res => {
+        console.log(user, 'user before')
+        setUser(this.state)
+        console.log(res, 'res')
+      })
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      // .then(() => setUser({ user: this.state }))
+      // .then(() => this.setState({ name: this.state.name, location: this.state.location, biography: this.state.biography, email: this.state.email }))
+      // .then(() => {
+      //   this.setState((state) => {
+      //     name: state.name,
+      //     location: state.location,
+      //     biography: state.biography
+      //     })
+      //   })
+      .then(() => console.log('this.state is', this.state))
       .then(() => history.push('/'))
       .catch(error => {
         this.setState({ name: '', location: '', biography: '', email: '' })
@@ -45,7 +59,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    // const { name, location, biography } = this.state
+    const { name, location, biography } = this.state.user
 
     return (
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
@@ -55,7 +69,7 @@ class UpdateArtist extends Component {
             <Form.Label>Name</Form.Label>
             <Form.Control
               name="name"
-              value={this.state.name}
+              value={name}
               type="string"
               placeholder="Name"
               onChange={this.handleChange}
@@ -65,7 +79,7 @@ class UpdateArtist extends Component {
             <Form.Label>Location</Form.Label>
             <Form.Control
               name="location"
-              value={this.state.location}
+              value={location}
               type="string"
               placeholder="Location"
               onChange={this.handleChange}
@@ -75,7 +89,7 @@ class UpdateArtist extends Component {
             <Form.Label>Biography</Form.Label>
             <Form.Control
               name="biography"
-              value={this.state.biography}
+              value={biography}
               type="string"
               placeholder="Biography"
               as="textarea"

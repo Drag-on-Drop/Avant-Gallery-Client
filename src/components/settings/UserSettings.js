@@ -21,7 +21,7 @@ class UserSettings extends Component {
       <div>
         <br />
         <Row>
-          <UpdateArtist msgAlert={msgAlert} user={user}/>
+          <UpdateArtist msgAlert={msgAlert} user={user} setUser={this.props.setUser}/>
           <ChangePassword msgAlert={msgAlert} user={user}/>
         </Row>
       </div>
