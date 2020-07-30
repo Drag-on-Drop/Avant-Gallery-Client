@@ -16,7 +16,7 @@ const MainCarousel = () => {
         {images.map((image) => (
           <Carousel.Item key={image._id}>
             <Link to={`/artworks/${image._id}`}>
-              <img height={450} width={600} src={image.imageUrl} fluid/>
+              <img height={450} width={600} src={image.imageUrl}/>
             </Link>
             <p style={{ color: 'grey', textAlign: 'right' }}>{image.name}</p>
           </Carousel.Item>
@@ -26,14 +26,14 @@ const MainCarousel = () => {
   }
 
   useEffect(() => {
-    getRecentImages(5)
+    getRecentImages()
       .then(response => setImages(response.data.artworks))
       .then(() => console.log('images', images))
       .catch(console.error)
   }, [])
 
   return (
-    <Container className="fluid">
+    <Container className="fluid-container">
       <Row className="align-me" float="center">
         <Col xs={2}></Col>
         <Col>

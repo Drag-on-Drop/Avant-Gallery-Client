@@ -8,7 +8,7 @@ import Footer from './Layout/Footer'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
-import UpdateArtist from './auth/UpdateArtist'
+// import UpdateArtist from './auth/UpdateArtist'
 // import UploadArt from './artwork/UploadArt'
 import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
@@ -67,12 +67,12 @@ class App extends Component {
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/user-settings' render={() => (
-            <UserSettings msgAlert={this.msgAlert} user={user} />
+            <UserSettings msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
           )} />
-          <AuthenticatedRoute path='/update-artist' setUser={this.setUser} render={(props) => (
+          { /* <AuthenticatedRoute path='/update-artist' render={(props) => (
             <UpdateArtist {...props} msgAlert={this.msgAlert} user={user} setUser={this.setUser} />
 
-          )} />
+          )} /> */ }
           <Route user={user} path='/view-artists' render={() => (<IndexArtist msgAlert={this.msgAlert} />
           )} />
           {/* Need user prop to declare owner of art? */}
