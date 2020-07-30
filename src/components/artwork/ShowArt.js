@@ -85,7 +85,7 @@ class ShowArt extends Component {
       <div className="show-art">
         <br />
         <Container>
-          <Row justify-center>
+          <Row>
             <Col>
               <Image src={imageUrl}/>
             </Col>

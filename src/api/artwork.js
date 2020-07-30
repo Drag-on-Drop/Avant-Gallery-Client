@@ -73,10 +73,9 @@ export const editArtwork = (formData, artId, user) => {
   })
 }
 
-export const getRecentImages = (num) => {
+export const getRecentImages = () => {
   return axios({
     url: apiUrl + '/artworks/recent',
-    method: 'GET',
-    data: { num: num }
+    method: 'GET'
   })
 }

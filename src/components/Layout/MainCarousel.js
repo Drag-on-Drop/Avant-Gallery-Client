@@ -26,7 +26,7 @@ const MainCarousel = () => {
   }
 
   useEffect(() => {
-    getRecentImages(5)
+    getRecentImages()
       .then(response => setImages(response.data.artworks))
       .then(() => console.log('images', images))
       .catch(console.error)
