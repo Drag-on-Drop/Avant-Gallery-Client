@@ -10,44 +10,37 @@ class UpdateArtist extends Component {
     super(props)
     console.log('props are:', props)
     this.state = {
-      user: this.props.user
-      // name: this.props.user.name,
-      // location: this.props.user.location,
-      // biography: this.props.user.biography,
-      // _id: this.props.user._id
+      // editedUser: this.props.user
+      name: this.props.user.name,
+      location: this.props.user.location,
+      biography: this.props.user.biography,
+      _id: this.props.user._id,
+      token: this.props.user.token
     }
   }
 
-  handleChange = event => {
-    const updatedField = { [event.target.name]: event.target.value }
-    const editedUser = Object.assign(this.state.user, updatedField)
-    this.setState({ user: editedUser })
-  }
+  handleChange = event => this.setState({
+    [event.target.name]: event.target.value
+  })
+
   onUpdateArtist = event => {
     event.preventDefault()
     const { msgAlert, history, user, setUser } = this.props
     updateArtist(this.state, user)
       // .then(() => setUser(this.state.user))
       .then(res => {
-        console.log(user, 'user before')
+        console.log('user before', user)
         setUser(this.state)
-        console.log(res, 'res')
+        console.log('state', this.state)
+        console.log('user after', user)
       })
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      // .then(() => this.setState({ name: this.state.name, location: this.state.location, biography: this.state.biography, email: this.state.email }))
-      // .then(() => {
-      //   this.setState((state) => {
-      //     name: state.name,
-      //     location: state.location,
-      //     biography: state.biography
-      //     })
-      //   })
       .then(() => console.log('this.state is', this.state))
-      .then(() => history.push('/'))
+      .then(() => history.push(`/artists/${this.state._id}`))
       .catch(error => {
         this.setState({ name: '', location: '', biography: '', email: '' })
         msgAlert({
@@ -59,7 +52,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    const { name, location, biography } = this.state.user
+    const { name, location, biography } = this.state
 
     return (
       <div className="col-sm-10 col-md-6 mx-auto mt-5">

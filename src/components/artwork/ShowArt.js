@@ -87,7 +87,7 @@ class ShowArt extends Component {
         <Container>
           <Row justify-center>
             <Col>
-              <Image src={imageUrl} fluid/>
+              <Image src={imageUrl}/>
             </Col>
           </Row>
         </Container>
