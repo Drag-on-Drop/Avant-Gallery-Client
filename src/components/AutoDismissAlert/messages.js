@@ -17,6 +17,7 @@ export default {
   artDeleteFailure: 'An error occured, unable to delete this submission.',
   artEditSuccess: 'Submission successfully edited.',
   artEditFailure: 'An error occured, unable to edit this submission. Please try again.',
+  loadCarouselFailure: 'An error occured, unable to load images into carousel. Good Luck.',
 
   // Artist messages
   showArtistFailure: 'An error occured, unable to show artist.',

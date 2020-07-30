@@ -8,7 +8,6 @@ import Button from 'react-bootstrap/Button'
 class UpdateArtist extends Component {
   constructor (props) {
     super(props)
-    console.log('props are:', props)
     this.state = {
       // editedUser: this.props.user
       name: this.props.user.name,
@@ -28,18 +27,12 @@ class UpdateArtist extends Component {
     const { msgAlert, history, user, setUser } = this.props
     updateArtist(this.state, user)
       // .then(() => setUser(this.state.user))
-      .then(res => {
-        console.log('user before', user)
-        setUser(this.state)
-        console.log('state', this.state)
-        console.log('user after', user)
-      })
+      .then(res => setUser(this.state))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      .then(() => console.log('this.state is', this.state))
       .then(() => history.push(`/artists/${this.state._id}`))
       .catch(error => {
         this.setState({ name: '', location: '', biography: '', email: '' })

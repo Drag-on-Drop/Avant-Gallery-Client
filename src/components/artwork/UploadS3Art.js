@@ -65,13 +65,14 @@ function UploadS3Art (props) {
       </Form.Group>
       <Form.Group controlId="File">
         <Form.Label>Image</Form.Label>
+        <br />
         <input
           required
           type="file"
           name="image"
           onChange={(event) => setImage(event.target.files[0])} />
       </Form.Group>
-      <Button variant="primary" type="button" value="Upload" onClick={uploadWithFormData}>
+      <Button variant="dark" type="button" value="Upload" size="sm" onClick={uploadWithFormData}>
         Submit
       </Button>
     </Form>

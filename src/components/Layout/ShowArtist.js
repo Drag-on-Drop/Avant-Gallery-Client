@@ -19,7 +19,6 @@ class ShowArtist extends Component {
     const id = this.props.match.params.id
     showArtist(id)
       .then(response => {
-        console.log('show artist', response)
         this.setState({
           artist: response.data.artist,
           artworks: response.data.artworks,
@@ -31,7 +30,6 @@ class ShowArtist extends Component {
           artist: null,
           notFound: true
         })
-        console.error(error)
         this.props.msgAlert({
           heading: 'Could not find that artist: ' + error.message,
           message: messages.showArtistFailure,
@@ -41,17 +39,14 @@ class ShowArtist extends Component {
     // get art by this user
     showArtistArt(id)
       .then(response => {
-        console.log('show artist art', response)
         this.setState({
           artworks: response.data.artworks
         })
-        console.log('state', this.state)
       })
       .catch(error => {
         this.setState({
           artworks: null
         })
-        console.error(error)
         this.props.msgAlert({
           heading: 'Could not retrieve art for this artist: ' + error.message,
           message: messages.showArtistArtFailure,
@@ -78,7 +73,6 @@ class ShowArtist extends Component {
     }
 
     let artCards = ''
-    console.log('artworks:', this.state.artworks)
     if (this.state.artworks) {
       artCards = <ArtCardColumns artList={this.state.artworks} />
     }
