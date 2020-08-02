@@ -17,13 +17,26 @@ class ShowArtist extends Component {
 
   componentDidMount () {
     const id = this.props.match.params.id
+    this.renderArtist(id)
+    this.renderArtistArt(id)
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      const id = this.props.match.params.id
+      this.renderArtist(id)
+      this.renderArtistArt(id)
+    }
+  }
+
+  renderArtist (id) {
     showArtist(id)
       .then(response => {
-        this.setState({
+        this.setState(() => ({
           artist: response.data.artist,
           artworks: response.data.artworks,
           notFound: false
-        })
+        }))
       })
       .catch(error => {
         this.setState({
@@ -36,12 +49,14 @@ class ShowArtist extends Component {
           variant: 'danger'
         })
       })
-    // get art by this user
+  }
+
+  renderArtistArt (id) {
     showArtistArt(id)
       .then(response => {
-        this.setState({
+        this.setState(() => ({
           artworks: response.data.artworks
-        })
+        }))
       })
       .catch(error => {
         this.setState({
