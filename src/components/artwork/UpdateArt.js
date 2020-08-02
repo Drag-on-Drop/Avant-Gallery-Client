@@ -9,7 +9,6 @@ import Button from 'react-bootstrap/Button'
 class UpdateArt extends Component {
   constructor (props) {
     super(props)
-    console.log('props are:', props)
 
     this.state = {
       name: this.props.art.name,
@@ -26,9 +25,9 @@ class UpdateArt extends Component {
     event.preventDefault()
 
     const { user, history, msgAlert, match } = this.props
-    console.log('state is:', this.state)
-    console.log('id is:', match.params.id)
-    console.log('user is:', user)
+    // console.log('state is:', this.state)
+    // console.log('id is:', match.params.id)
+    // console.log('user is:', user)
     editArtwork(this.state, match.params.id, user)
       .then(() => msgAlert({
         heading: 'Edit Success',
@@ -46,9 +45,7 @@ class UpdateArt extends Component {
   }
 
   render () {
-    //
     const { name, description } = this.state
-    // bootstrap form
     return (
       <div>
         <h3>Edit this art piece</h3>

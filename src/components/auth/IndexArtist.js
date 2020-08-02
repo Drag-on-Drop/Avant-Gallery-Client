@@ -23,13 +23,12 @@ class IndexArtist extends Component {
         })
       })
       .catch(error => {
-        console.log(error)
         this.setState({
           artists: null,
           notFound: true
         })
         msgAlert({
-          heading: 'Could not reach Server',
+          heading: 'Could not reach Server: ' + error.message,
           message: messages.indexArtistFailure,
           variant: 'danger'
         })

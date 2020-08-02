@@ -15,8 +15,6 @@ class UserSettings extends Component {
   }
 
   render () {
-    // const user = this.props.user
-    // const msgAlert = this.props.msgAlert
     const { msgAlert, user, setUser } = this.props
     return (
       <div>

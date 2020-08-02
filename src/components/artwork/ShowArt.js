@@ -12,8 +12,6 @@ import Button from 'react-bootstrap/Button'
 class ShowArt extends Component {
   constructor (props) {
     super(props)
-    console.log('initial props are', this.props)
-    console.log('initial user is', this.props.user)
 
     this.state = {
       art: null,
@@ -24,13 +22,10 @@ class ShowArt extends Component {
   componentDidMount () {
     showArtwork(this.props.match.params.id)
       .then(res => {
-        console.log(res)
         this.setState({
           art: res.data.artwork,
           notFound: false
         })
-        console.log('art is:', this.state.art)
-        console.log('setArt is:', this.props.setArt)
       })
       .then(() => this.props.setArt(this.state.art))
       .catch(error => {
@@ -38,7 +33,6 @@ class ShowArt extends Component {
           art: null,
           notFound: true
         })
-        console.error(error)
         this.props.msgAlert({
           heading: 'Could not find that art: ' + error.message,
           message: messages.showArtFailure,
@@ -48,8 +42,6 @@ class ShowArt extends Component {
   }
 
   render () {
-    console.log('user inside render is', this.props.user)
-    // console.log('inside render the owner id inside the state is:', this.state.art)
     if (!this.state.art && !this.state.notFound) {
       return (
         <div className="loading-art">
