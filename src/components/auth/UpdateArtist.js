@@ -9,33 +9,29 @@ class UpdateArtist extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      // editedUser: this.props.user
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography,
-      _id: this.props.user._id,
-      token: this.props.user.token
+      editedUser: this.props.user
     }
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event => {
+    const editedUser = Object.assign({}, this.state.editedUser)
+    editedUser[event.target.name] = event.target.value
+    this.setState((prevUser) => ({ editedUser: editedUser }))
+  }
 
   onUpdateArtist = event => {
     event.preventDefault()
     const { msgAlert, history, user, setUser } = this.props
-    updateArtist(this.state, user)
-      // .then(() => setUser(this.state.user))
-      .then(res => setUser(this.state))
+    updateArtist(this.state.editedUser, user)
+      .then(() => setUser(this.state.editedUser))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      .then(() => history.push(`/artists/${this.state._id}`))
+      .then(() => history.push(`/artists/${this.state.editedUser._id}`))
       .catch(error => {
-        this.setState({ name: '', location: '', biography: '', email: '' })
+        this.setState({ editedUser: this.props.user })
         msgAlert({
           heading: 'Update Artist Failed with error: ' + error.message,
           message: messages.updateArtistFailure,
@@ -45,7 +41,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    const { name, location, biography } = this.state
+    const { name, location, biography } = this.state.editedUser
 
     return (
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
