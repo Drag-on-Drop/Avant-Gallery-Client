@@ -8,34 +8,30 @@ import Button from 'react-bootstrap/Button'
 class UpdateArtist extends Component {
   constructor (props) {
     super(props)
-    console.log('props are:', props)
     this.state = {
-      // user: this.props.user,
-      name: this.props.user.name,
-      location: this.props.user.location,
-      biography: this.props.user.biography
-      // name: '',
-      // location: '',
-      // biography: ''
+      editedUser: this.props.user
     }
   }
 
-  handleChange = event => this.setState({ [event.target.name]: event.target.value })
+  handleChange = event => {
+    const editedUser = Object.assign({}, this.state.editedUser)
+    editedUser[event.target.name] = event.target.value
+    this.setState((prevUser) => ({ editedUser: editedUser }))
+  }
 
   onUpdateArtist = event => {
     event.preventDefault()
-    const { msgAlert, history, user } = this.props
-    updateArtist(this.state, user)
-      // .then(() => setUser(this.state.user))
+    const { msgAlert, history, user, setUser } = this.props
+    updateArtist(this.state.editedUser, user)
+      .then(() => setUser(this.state.editedUser))
       .then(() => msgAlert({
         heading: 'Update Artist Success',
         message: messages.updateArtistSuccess,
         variant: 'success'
       }))
-      // .then(() => setUser({ user: this.state }))
-      .then(() => history.push('/'))
+      .then(() => history.push(`/artists/${this.state.editedUser._id}`))
       .catch(error => {
-        this.setState({ name: '', location: '', biography: '', email: '' })
+        this.setState({ editedUser: this.props.user })
         msgAlert({
           heading: 'Update Artist Failed with error: ' + error.message,
           message: messages.updateArtistFailure,
@@ -45,7 +41,7 @@ class UpdateArtist extends Component {
   }
 
   render () {
-    // const { name, location, biography } = this.state
+    const { name, location, biography } = this.state.editedUser
 
     return (
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
@@ -55,7 +51,7 @@ class UpdateArtist extends Component {
             <Form.Label>Name</Form.Label>
             <Form.Control
               name="name"
-              value={this.state.name}
+              value={name}
               type="string"
               placeholder="Name"
               onChange={this.handleChange}
@@ -65,7 +61,7 @@ class UpdateArtist extends Component {
             <Form.Label>Location</Form.Label>
             <Form.Control
               name="location"
-              value={this.state.location}
+              value={location}
               type="string"
               placeholder="Location"
               onChange={this.handleChange}
@@ -75,7 +71,7 @@ class UpdateArtist extends Component {
             <Form.Label>Biography</Form.Label>
             <Form.Control
               name="biography"
-              value={this.state.biography}
+              value={biography}
               type="string"
               placeholder="Biography"
               as="textarea"

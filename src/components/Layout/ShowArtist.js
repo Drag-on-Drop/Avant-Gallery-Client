@@ -17,41 +17,51 @@ class ShowArtist extends Component {
 
   componentDidMount () {
     const id = this.props.match.params.id
+    this.renderArtist(id)
+    this.renderArtistArt(id)
+  }
+
+  componentDidUpdate (prevProps) {
+    if (this.props.match.params.id !== prevProps.match.params.id) {
+      const id = this.props.match.params.id
+      this.renderArtist(id)
+      this.renderArtistArt(id)
+    }
+  }
+
+  renderArtist (id) {
     showArtist(id)
       .then(response => {
-        console.log('show artist', response)
-        this.setState({
+        this.setState(() => ({
           artist: response.data.artist,
           artworks: response.data.artworks,
           notFound: false
-        })
+        }))
       })
       .catch(error => {
         this.setState({
           artist: null,
           notFound: true
         })
-        console.error(error)
         this.props.msgAlert({
           heading: 'Could not find that artist: ' + error.message,
           message: messages.showArtistFailure,
           variant: 'danger'
         })
       })
-    // get art by this user
+  }
+
+  renderArtistArt (id) {
     showArtistArt(id)
       .then(response => {
-        console.log('show artist art', response)
-        this.setState({
+        this.setState(() => ({
           artworks: response.data.artworks
-        })
-        console.log('state', this.state)
+        }))
       })
       .catch(error => {
         this.setState({
           artworks: null
         })
-        console.error(error)
         this.props.msgAlert({
           heading: 'Could not retrieve art for this artist: ' + error.message,
           message: messages.showArtistArtFailure,
@@ -78,7 +88,6 @@ class ShowArtist extends Component {
     }
 
     let artCards = ''
-    console.log('artworks:', this.state.artworks)
     if (this.state.artworks) {
       artCards = <ArtCardColumns artList={this.state.artworks} />
     }

@@ -1,34 +1,43 @@
-**Gallery D'Art** is a single page application for storing images in a virutal database. This app was inspired by the need for artists to showcase their work in times of social distancing. Images uploaded to the database are shared in the main gallery along side the work of other artists. Viewing an artist profile will give users more details about the artist, their contact information for art inquiries and contract work, and a gallery view featuring all of that artist's work. 
+Inspired by the need for artists to showcase their work in times of social distancing, **Gallery D'Art** is a single page application for sharing art and connecting.  
+
+Users can create a profile and upload their artwork, which is hosted on the database and shared in the main gallery alongside all other artworks as thumbnails. Users do not need to create an account to view artworks and artists, but need an account to host art.
+
+Clicking on an artwork directs the user to a full-size image with a download link, a description of the artwork, date posted, and a link to the artist. Clicking on the artist link directs the user to the artist’s profile page where they can see a user location, bio, and a personal thumbnail gallery. Users are also able to index all artists and update their profiles from the navigation bar.
+Enjoy!
 
 **[Deployed Server Application](https://ancient-garden-56671.herokuapp.com)** |
 **[Server Repository](https://github.com/Drag-on-Drop/Avant-Gallery-Server)** |
 **[Deployed Client Application](https://drag-on-drop.github.io/Avant-Gallery-Client/#/)**
 
 **Technologies Used**
-Bootstrap, JavaScript, React
+- React & React Bootstrap
+- JavaScript
+- Axios
+- AWS S3
+- CSS
 
-**Unsolved Problems**
-
-- make a tag view - click the tag on the art the show all art with that tag
-- formatting, better spacing, css on center image
-- development of artist profile, give the artist a main pictures, possibly a carousel of their own art to give each artist their own space
-- add an about blurb to give the viewer an understanding of what the website is about
-- sign in should redirect the user to their profile
-- occasionally when you click on an artists profile, the art won't show up
-- remove "dead" code
-- fix update artist bug
+**User Stories**
+As an unregistered user I can see the Home Page
+As an unregistered user I can view images uploaded in the database
+As an unregistered user I can view images uploaded by a specific Artist
+As an unregistered user I can create a User Account
+As a registered/signed in User I can CRUD images
+As a registered/signed in User I can edit my Profile
 
 **Wireframes**
+![Wireframes](https://github.com/Drag-on-Drop/Avant-Gallery-Client/blob/readMe/Avant%20Gallery%20Wireframes.PNG)
+
+**Site Flow Diagram**
+![Site Flow](https://github.com/Drag-on-Drop/Avant-Gallery-Client/blob/readMe/Site%20Flow.PNG)
+
+**Unsolved Problems & Planned Features**
+- Add image tags to files to allow users to find more images with the same tag
+- CSS formatting, spacing & styling
+- Artist profile features: artist profile picture, main pictures, carousel of featured art
+- About the gallery info section
+- Fix: viewing an artist profile won't always populate their work
 
 ![Entity Relationship Diagram](https://github.com/Drag-on-Drop/Avant-Gallery-Server/blob/master/Avant%20Gallery%20ERD.PNG "Entity Relationship Diagram")
-
-**User Stores**
-- As an unregistered user I can view the Home Page
-- As an unregistered user I can view uploaded art to the database
-- As an unregistered user I can view uploaded art by a specific Artist
-- As an unregistered user I can create a User Account
-- As a registered/signed in User I can CRUD my images
-- As a registered/signed in User I can edit my User Profile
 
 **Planning, Process and Problem Solving Strategy**
 

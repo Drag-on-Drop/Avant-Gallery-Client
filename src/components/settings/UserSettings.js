@@ -15,13 +15,12 @@ class UserSettings extends Component {
   }
 
   render () {
-    const user = this.props.user
-    const msgAlert = this.props.msgAlert
+    const { msgAlert, user, setUser } = this.props
     return (
       <div>
         <br />
         <Row>
-          <UpdateArtist msgAlert={msgAlert} user={user}/>
+          <UpdateArtist msgAlert={msgAlert} user={user} setUser={setUser}/>
           <ChangePassword msgAlert={msgAlert} user={user}/>
         </Row>
       </div>

@@ -18,7 +18,7 @@ class IndexArt extends Component {
       .then(response => this.setState({
         artworks: response.data.artworks
       }))
-      .then(console.log('user logged in is:', this.props.user))
+      // .then(console.log('user logged in is:', this.props.user))
       .catch(error => {
         this.setState({
           artworks: null
@@ -32,7 +32,6 @@ class IndexArt extends Component {
   }
 
   render () {
-    console.log('render art', this.state.artworks)
     if (!this.state.artworks) {
       return (
         <div className="index-not-found">

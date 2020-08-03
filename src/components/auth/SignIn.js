@@ -23,17 +23,19 @@ class SignIn extends Component {
 
   onSignIn = event => {
     event.preventDefault()
-    console.log('sign in, props?', this.props)
     const { msgAlert, history, setUser } = this.props
-
+    let user
     signIn(this.state)
-      .then(res => setUser(res.data.user))
+      .then(res => {
+        user = res.data.user
+        setUser(user)
+      })
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => history.push(`/artists/${user._id}`))
       .catch(error => {
         this.setState({ email: '', password: '' })
         msgAlert({

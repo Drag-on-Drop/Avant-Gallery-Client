@@ -1,15 +1,11 @@
 import React from 'react'
-// import Layout from './Layout'
-// import MainPicture from './MainPicture'
 import MainCarousel from './MainCarousel'
 
-const Home = () => (
-  // <Layout>
+const Home = (props) => (
   <div>
     <br/>
-    <MainCarousel />
+    <MainCarousel msgAlert={props.msgAlert} />
   </div>
-  // </Layout>
 )
 
 export default Home

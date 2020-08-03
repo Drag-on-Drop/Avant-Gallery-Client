@@ -6,7 +6,6 @@ import messages from '../AutoDismissAlert/messages'
 
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-// import Col from 'react-bootstrap/Col'
 
 class ChangePassword extends Component {
   constructor () {
@@ -48,8 +47,6 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      // <div className="row">
-      // <div className="col-sm-10 col-md-8 mx-auto mt-5">
       <div className="col-sm-10 col-md-6 mx-auto mt-5">
         <h3>Change Password</h3>
         <Form onSubmit={this.onChangePassword}>
@@ -84,8 +81,6 @@ class ChangePassword extends Component {
           </Button>
         </Form>
       </div>
-      // </div>
-      // </div>
     )
   }
 }

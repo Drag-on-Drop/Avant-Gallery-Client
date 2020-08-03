@@ -1,18 +1,7 @@
 import apiUrl from '../apiConfig'
 import axios from 'axios'
 
-export const addArtwork = (formData, user) => {
-  return axios({
-    method: 'POST',
-    url: apiUrl + '/artworks',
-    headers: {
-      'Authorization': `Token token=${user.token}`
-    },
-    data: formData
-  })
-}
-
-// s3 upload
+// S3 upload
 export const addS3Artwork = (contentType, formData, user) => {
   return axios({
     method: 'POST',
@@ -41,16 +30,10 @@ export const indexArtwork = () => {
 
 export const showArtistArt = (artistId) => {
   return axios({
-    url: apiUrl + `/artworks/user/${artistId}`
+    url: apiUrl + `/artworks/user/${artistId}`,
+    method: 'GET'
   })
 }
-
-// export const indexArtistArtwork = (artistId) => {
-//   return axios({
-//     url: apiUrl + `/artworks/${artistId}`,
-//     method: 'GET'
-//   })
-// }
 
 export const deleteArtwork = (artId, user) => {
   return axios({
@@ -73,10 +56,10 @@ export const editArtwork = (formData, artId, user) => {
   })
 }
 
-export const getRecentImages = (num) => {
+// 5 most recent images - targetted at carousel
+export const getRecentImages = () => {
   return axios({
     url: apiUrl + '/artworks/recent',
-    method: 'GET',
-    data: { num: num }
+    method: 'GET'
   })
 }
