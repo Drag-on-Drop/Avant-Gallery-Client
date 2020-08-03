@@ -16,7 +16,11 @@ const MainCarousel = (props) => {
         {images.map((image) => (
           <Carousel.Item key={image._id}>
             <Link to={`/artworks/${image._id}`}>
-              <img height={450} width={600} src={image.imageUrl}/>
+              <img
+                height="450"
+                src={image.imageUrl}
+                alt={`${image.name} by ${image.owner.name}`}
+                className="d-block mw-100"/>
             </Link>
             <p style={{ color: 'grey', textAlign: 'right' }}>{image.name}</p>
           </Carousel.Item>
@@ -40,11 +44,9 @@ const MainCarousel = (props) => {
   return (
     <Container className="fluid-container">
       <Row className="align-me" float="center">
-        <Col xs={2}></Col>
         <Col>
           {itemize(images)}
         </Col>
-        <Col xs={2}></Col>
       </Row>
     </Container>
   )
