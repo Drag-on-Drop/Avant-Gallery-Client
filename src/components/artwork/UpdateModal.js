@@ -30,12 +30,13 @@ const UpdateArtModal = (props) => {
     e.preventDefault()
     editArtwork(art, props.match.params.id, props.user)
       .then(() => {
-        handleClose()
         props.msgAlert({
           heading: 'Edit Success',
           message: messages.artEditSuccess,
           variant: 'success'
         })
+        handleClose()
+        props.setRefresh(!props.refresh)
       })
       .catch(error => {
         props.msgAlert({
