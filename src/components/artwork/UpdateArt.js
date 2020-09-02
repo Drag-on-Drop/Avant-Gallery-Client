@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-
+import DestroyArt from './DestroyArt'
 import { editArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Form, Button } from 'react-bootstrap'
 
 class UpdateArt extends Component {
   constructor (props) {
@@ -25,9 +24,6 @@ class UpdateArt extends Component {
     event.preventDefault()
 
     const { user, history, msgAlert, match } = this.props
-    // console.log('state is:', this.state)
-    // console.log('id is:', match.params.id)
-    // console.log('user is:', user)
     editArtwork(this.state, match.params.id, user)
       .then(() => msgAlert({
         heading: 'Edit Success',
@@ -80,6 +76,7 @@ class UpdateArt extends Component {
             Submit
           </Button>
         </Form>
+        <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
       </div>
     )
   }

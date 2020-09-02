@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { showArtwork } from '../../api/artwork'
+import UpdateArtModal from './UpdateModal'
 import messages from '../AutoDismissAlert/messages'
-import DestroyArt from './DestroyArt'
-import Image from 'react-bootstrap/Image'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import { Image, Container, Row, Col, Button } from 'react-bootstrap'
 
 class ShowArt extends Component {
   constructor (props) {
@@ -59,15 +55,16 @@ class ShowArt extends Component {
     }
 
     const { imageUrl, name, description, owner, createdAt } = this.state.art
+    const { user, msgAlert } = this.props
 
     let ownerButtons = ''
-    if (this.props.user && owner._id === this.props.user._id) {
+    if (user && owner._id === user._id) {
       ownerButtons = (
         <div>
           <Link to={`/artwork/${this.props.match.params.id}/patch`}>
             <Button variant="info">Edit Artwork</Button>
           </Link>
-          <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
+          <UpdateArtModal {...this.props} name={name} description={description} user={user} msgAlert={msgAlert} />
         </div>
       )
     }
