@@ -1,12 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import UpdateArt from './UpdateArt'
 import { showArtwork } from '../../api/artwork'
-import UpdateArtModal from './UpdateModal'
 import messages from '../AutoDismissAlert/messages'
-import { Image, Container, Row, Col, Button } from 'react-bootstrap'
+import { Image, Container, Row, Col, Button, Modal } from 'react-bootstrap'
 
 const ShowArt = props => {
   const [art, setArt] = useState()
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   useEffect(() => {
     showArtwork(props.match.params.id)
@@ -20,35 +24,67 @@ const ShowArt = props => {
 
   if (!art) { return <p>Loading...</p> }
   const { imageUrl, name, description, owner, createdAt } = art
-  const { user, msgAlert, match } = props
+  const { user, msgAlert } = props
   let ownerButtons = ''
   if (user && owner._id === user._id) {
     ownerButtons = (
-      <div>
-        <Link to={`/artwork/${match.params.id}/patch`}>
-          <Button variant="info">Edit Artwork</Button>
-        </Link>
-        <UpdateArtModal {...props}
+      <Fragment>
+        <UpdateArt {...props}
           art={art}
           user={user}
           name={name}
           setArt={setArt}
           msgAlert={msgAlert}
           description={description} />
-      </div>
+      </Fragment>
     )
   }
 
   return (
-    <div className="show-art">
+    <Fragment>
       <br />
-      <Container><Row><Col><Image src={imageUrl}/></Col></Row></Container>
-      <a href={imageUrl}>Download</a>
-      <p>{name} by <Link to={`/artists/${owner._id}`}>{owner.name}</Link></p>
-      <p>{description}</p>
-      <small className="text-muted">Posted on {createdAt.substring(0, 10)}</small>
-      {ownerButtons}
-    </div>
+      <Container>
+        <Row>
+          <Col align="center">
+            <Image className="image-view" src={imageUrl}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col align="center">
+            <Button className="placard" variant="light" onClick={handleShow}>
+              <div>{name} by {owner.name}</div>
+              <div>{description}</div>
+              <div>posted on {createdAt.substring(0, 10)}</div>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+      <Modal
+        className="placard-modal"
+        centered
+        size="sm"
+        show={show}
+        onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {name}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{description}</p>
+
+        </Modal.Body>
+        <Modal.Footer className="text-justify">
+          <p className="text-muted mr-auto">
+            <Link to={`/artists/${owner._id}`}>
+              {owner.name}
+            </Link> <small>{createdAt.substring(0, 10)}</small>
+          </p>
+          {ownerButtons}
+          <Button variant="outline-secondary" href={imageUrl}>▼</Button>
+        </Modal.Footer>
+      </Modal>
+    </Fragment>
   )
 }
 

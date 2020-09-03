@@ -47,7 +47,7 @@ export const deleteArtwork = (artId, user) => {
 
 export const editArtwork = (formData, artId, user) => {
   return axios({
-    url: apiUrl + `/artworks/${artId}/patch`,
+    url: apiUrl + `/artworks/${artId}`,
     method: 'PATCH',
     headers: {
       'Authorization': `Token token=${user.token}`

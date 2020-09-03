@@ -22,7 +22,6 @@ function UploadS3Art (props) {
       .then(res => {
         link = res.data.artwork._id
         setArt(res.data.artwork)
-        console.log('artwork is: ', res.data.artwork)
       })
       .then(() => msgAlert({
         heading: 'Post Art Success',
