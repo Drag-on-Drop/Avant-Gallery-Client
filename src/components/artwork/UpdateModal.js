@@ -36,7 +36,13 @@ const UpdateArtModal = (props) => {
           variant: 'success'
         })
         handleClose()
-        props.setRefresh(!props.refresh)
+        console.log('props.art are: ', props.art)
+        console.log('art is: ', art)
+        props.setArt({
+          ...props.art,
+          name: art.name,
+          description: art.description
+        })
       })
       .catch(error => {
         props.msgAlert({

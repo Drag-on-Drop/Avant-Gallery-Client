@@ -7,7 +7,6 @@ import { Image, Container, Row, Col, Button } from 'react-bootstrap'
 
 const ShowArt = props => {
   const [art, setArt] = useState()
-  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     showArtwork(props.match.params.id)
@@ -30,10 +29,10 @@ const ShowArt = props => {
           <Button variant="info">Edit Artwork</Button>
         </Link>
         <UpdateArtModal {...props}
+          art={art}
           user={user}
           name={name}
-          refresh={refresh}
-          setRefresh={setRefresh}
+          setArt={setArt}
           msgAlert={msgAlert}
           description={description} />
       </div>
