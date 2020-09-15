@@ -14,7 +14,7 @@ const ArtCard = props => {
         </Link>
         <Card.Text>by {
           <Link to={`/artists/${props.art.owner._id}`}>
-            props.art.owner.name
+            {props.art.owner.name}
           </Link>
         }
         </Card.Text>
