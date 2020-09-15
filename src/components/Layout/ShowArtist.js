@@ -4,6 +4,7 @@ import { showArtist } from '../../api/artist-api'
 import { showArtistArt } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import ArtCardColumns from './../artwork/ArtCardColumns'
+import Spinner from 'react-bootstrap/Spinner'
 
 class ShowArtist extends Component {
   constructor (props) {
@@ -11,7 +12,8 @@ class ShowArtist extends Component {
 
     this.state = {
       artist: null,
-      artworks: null
+      artworks: null,
+      loadingArt: false
     }
   }
 
@@ -55,12 +57,14 @@ class ShowArtist extends Component {
     showArtistArt(id)
       .then(response => {
         this.setState(() => ({
-          artworks: response.data.artworks
+          artworks: response.data.artworks,
+          loadingArt: true
         }))
       })
       .catch(error => {
         this.setState({
-          artworks: null
+          artworks: null,
+          loadingArt: false
         })
         this.props.msgAlert({
           heading: 'Could not retrieve art for this artist: ' + error.message,
@@ -103,7 +107,17 @@ class ShowArtist extends Component {
           <br />
           <p>{biography}</p>
         </div>
-        {artCards}
+        {this.state.loadingArt ? artCards
+          : <div>
+            <Spinner animation="grow" variant="primary" />
+            <Spinner animation="grow" variant="secondary" />
+            <Spinner animation="grow" variant="success" />
+            <Spinner animation="grow" variant="danger" />
+            <Spinner animation="grow" variant="warning" />
+            <Spinner animation="grow" variant="info" />
+            <Spinner animation="grow" variant="light" />
+            <Spinner animation="grow" variant="dark" />
+          </div>}
       </React.Fragment>
     )
   }
