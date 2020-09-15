@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { addS3Artwork } from './../../api/artwork.js'
 import messages from '../AutoDismissAlert/messages'
-
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Container, Row, Col, Form, Button, Image } from 'react-bootstrap'
 
 function UploadS3Art (props) {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [image, setImage] = useState('')
+  const [url, setUrl] = useState('')
+  const hiddenFileInput = React.useRef(null)
 
   function uploadWithFormData () {
     const formData = new FormData()
@@ -43,38 +43,71 @@ function UploadS3Art (props) {
 
   return (
     <Form>
-      <Form.Group controlId="Title">
-        <Form.Label>Image Title</Form.Label>
-        <Form.Control
-          type="text"
-          required
-          value={name}
-          onChange={(event) => { setName(event.target.value) }}
-          placeholder="Title"
-        />
-      </Form.Group>
-      <Form.Group controlId="Description">
-        <Form.Label>Description</Form.Label>
-        <Form.Control
-          type="textarea"
-          required
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
-          placeholder="Description"
-        />
-      </Form.Group>
-      <Form.Group controlId="File">
-        <Form.Label>Image</Form.Label>
-        <br />
-        <input
-          required
-          type="file"
-          name="image"
-          onChange={(event) => setImage(event.target.files[0])} />
-      </Form.Group>
-      <Button variant="dark" type="button" value="Upload" size="sm" onClick={uploadWithFormData}>
-        Submit
-      </Button>
+      <Container>
+        <Row className='justify-content-md-center'>
+          <Col md='auto'>
+            <br />
+            <Form.Group controlId='Title'>
+              <Form.Label>Image Title</Form.Label>
+              <Form.Control
+                type='text'
+                required
+                value={name}
+                onChange={e => { setName(e.target.value) }}
+                placeholder='Title'
+              />
+            </Form.Group>
+            <Form.Group controlId='Description'>
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type='textarea'
+                required
+                rows='2'
+                value={description}
+                onChange={e => setDescription(e.target.value)}
+                placeholder='Description'
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className='justify-content-md-center'>
+          <Col md='auto'>
+            <Form.Group controlId='File'>
+              <input
+                type='file'
+                ref={hiddenFileInput}
+                style={{ display: 'none' }}
+                onChange={e => {
+                  setImage(e.target.files[0])
+                  setUrl(URL.createObjectURL(e.target.files[0]))
+                }}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className='justify-content-md-center'>
+          <Col md='auto'>
+            <Button
+              onClick={() => hiddenFileInput.current.click()}
+              variant='secondary' type='button' size='sm'>
+              Upload Image
+            </Button>
+            <Button
+              variant='dark' type='button'
+              value='Upload' size='sm'
+              onClick={uploadWithFormData}>
+              Submit
+            </Button>
+            <br/>
+          </Col>
+        </Row>
+        <Row className='justify-content-md-center'>
+          <Col md='auto'>
+            <br/>
+            <Image className='thumbnail' src={url} />
+          </Col>
+        </Row>
+      </Container>
     </Form>
   )
 }

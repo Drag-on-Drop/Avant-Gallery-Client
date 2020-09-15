@@ -8,3 +8,65 @@ body {
   margin: 0 auto;
   align-items: center;
 }
+
+.thumbnail {
+  height: 100px;
+  width: auto;
+}
+
+.image-view {
+  max-width: 800px;
+  max-height: 450px;
+  height: auto;
+  padding: 1.5rem;
+  border: .2px solid grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.placard {
+  background: rgb(235,175,10);
+  background: linear-gradient(90deg, rgba(128,110,8,1) 2%, rgba(235,175,10,1) 49%, rgba(255,244,147,1) 100%);
+  color: #dea70d;
+  font-size: 4px;
+  border-color: rgb(235,175,10);
+  padding: 1px;
+}
+
+.placard-modal {
+  opacity: .9
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.text-wrap {
+  white-space: normal;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+}

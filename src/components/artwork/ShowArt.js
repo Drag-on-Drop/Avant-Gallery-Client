@@ -1,100 +1,91 @@
-import React, { Component } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import UpdateArt from './UpdateArt'
 import { showArtwork } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
-import DestroyArt from './DestroyArt'
-import Image from 'react-bootstrap/Image'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+import { Image, Container, Row, Col, Button, Modal } from 'react-bootstrap'
 
-class ShowArt extends Component {
-  constructor (props) {
-    super(props)
+const ShowArt = props => {
+  const [art, setArt] = useState()
+  const [show, setShow] = useState(false)
 
-    this.state = {
-      art: null,
-      notFound: false
-    }
-  }
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  componentDidMount () {
-    showArtwork(this.props.match.params.id)
-      .then(res => {
-        this.setState({
-          art: res.data.artwork,
-          notFound: false
-        })
-      })
-      .then(() => this.props.setArt(this.state.art))
-      .catch(error => {
-        this.setState({
-          art: null,
-          notFound: true
-        })
-        this.props.msgAlert({
-          heading: 'Could not find that art: ' + error.message,
-          message: messages.showArtFailure,
-          variant: 'danger'
-        })
-      })
-  }
+  useEffect(() => {
+    showArtwork(props.match.params.id)
+      .then(res => setArt(res.data.artwork))
+      .catch(error => props.msgAlert({
+        heading: 'Could not find that art: ' + error.message,
+        message: messages.showArtFailure,
+        variant: 'danger'
+      }))
+  }, [])
 
-  render () {
-    if (!this.state.art && !this.state.notFound) {
-      return (
-        <div className="loading-art">
-          <p>Loading...</p>
-        </div>
-      )
-    }
-
-    if (this.state.notFound) {
-      return (
-        <div className="art-not-found">
-          <p>Could not find that art piece. Sorry :(</p>
-        </div>
-      )
-    }
-
-    const { imageUrl, name, description, owner, createdAt } = this.state.art
-
-    let ownerButtons = ''
-    if (this.props.user && owner._id === this.props.user._id) {
-      ownerButtons = (
-        <div>
-          <Link to={`/artwork/${this.props.match.params.id}/patch`}>
-            <Button variant="info">Edit Artwork</Button>
-          </Link>
-          <DestroyArt msgAlert={this.props.msgAlert} user={this.props.user} />
-        </div>
-      )
-    }
-
-    // Some of these paragraphs should be pulled into a React component
-    return (
-      <div className="show-art">
-        <br />
-        <Container>
-          <Row>
-            <Col>
-              <Image src={imageUrl}/>
-            </Col>
-          </Row>
-        </Container>
-        <a href={imageUrl}>Download</a>
-        <p>{name} by <Link to={`/artists/${owner._id}`}>
-          {owner.name}
-        </Link>
-        </p>
-        <p>About the art:</p>
-        <p>{description}</p>
-        <small className="text-muted">Posted on {createdAt.substring(0, 10)}</small>
-        {ownerButtons}
-      </div>
+  if (!art) { return <p>Loading...</p> }
+  const { imageUrl, name, description, owner, createdAt } = art
+  const { user, msgAlert } = props
+  let ownerButtons = ''
+  if (user && owner._id === user._id) {
+    ownerButtons = (
+      <Fragment>
+        <UpdateArt {...props}
+          art={art}
+          user={user}
+          name={name}
+          setArt={setArt}
+          msgAlert={msgAlert}
+          description={description} />
+      </Fragment>
     )
   }
+
+  return (
+    <Fragment>
+      <br />
+      <Container>
+        <Row>
+          <Col align="center">
+            <Image className="image-view" src={imageUrl}/>
+          </Col>
+        </Row>
+        <Row>
+          <Col align="center">
+            <Button className="placard" variant="light" onClick={handleShow}>
+              <div>{name} by {owner.name}</div>
+              <div>{description}</div>
+              <div>posted on {createdAt.substring(0, 10)}</div>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
+      <Modal
+        className="placard-modal"
+        centered
+        size="sm"
+        show={show}
+        onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            {name}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>{description}</p>
+
+        </Modal.Body>
+        <Modal.Footer className="text-justify">
+          <p className="text-muted mr-auto">
+            <Link to={`/artists/${owner._id}`}>
+              {owner.name}
+            </Link> <small>{createdAt.substring(0, 10)}</small>
+          </p>
+          {ownerButtons}
+          <Button variant="outline-secondary" href={imageUrl}>▼</Button>
+        </Modal.Footer>
+      </Modal>
+    </Fragment>
+  )
 }
 
 export default ShowArt

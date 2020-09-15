@@ -1,42 +1,49 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
-
-import { editArtwork } from '../../api/artwork'
+import React, { Fragment, useState, useEffect } from 'react'
+import { Modal, Button, Form } from 'react-bootstrap'
 import messages from '../AutoDismissAlert/messages'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { editArtwork } from '../../api/artwork'
+import DestroyArt from './DestroyArt'
 
-class UpdateArt extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      name: this.props.art.name,
-      description: this.props.art.description,
-      edited: false
-    }
-  }
-
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
+const UpdateArt = (props) => {
+  const [show, setShow] = useState(false)
+  const [art, setArt] = useState({
+    name: props.name,
+    description: props.description
   })
 
-  onUpdateArt = event => {
-    event.preventDefault()
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  const handleChange = e => {
+    e.preventDefault()
+    const updatedField = { [e.target.name]: e.target.value }
+    setArt({ ...art, ...updatedField })
+  }
 
-    const { user, history, msgAlert, match } = this.props
-    // console.log('state is:', this.state)
-    // console.log('id is:', match.params.id)
-    // console.log('user is:', user)
-    editArtwork(this.state, match.params.id, user)
-      .then(() => msgAlert({
-        heading: 'Edit Success',
-        message: messages.artEditSuccess,
-        variant: 'success'
-      }))
-      .then(() => history.push(`/artworks/${this.props.art._id}`))
+  useEffect(() => {
+    setArt({
+      name: props.name,
+      description: props.description
+    })
+  }, [props])
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    editArtwork(art, props.match.params.id, props.user)
+      .then(() => {
+        props.msgAlert({
+          heading: 'Edit Success',
+          message: messages.artEditSuccess,
+          variant: 'success'
+        })
+        handleClose()
+        props.setArt({
+          ...props.art,
+          name: art.name,
+          description: art.description
+        })
+      })
       .catch(error => {
-        msgAlert({
+        props.msgAlert({
           heading: 'Edit Failure: ' + error.message,
           message: messages.artEditFailure,
           variant: 'danger'
@@ -44,45 +51,53 @@ class UpdateArt extends Component {
       })
   }
 
-  render () {
-    const { name, description } = this.state
-    return (
-      <div>
-        <h3>Edit this art piece</h3>
-        <Form onSubmit={this.onUpdateArt}>
-          <Form.Group controlId="name">
-            <Form.Label>Piece Title</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="name"
-              value={name}
-              placeholder="Enter Piece Title"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="description"
-              value={description}
-              placeholder="Enter Description"
-              onChange={this.handleChange}
-            />
-          </Form.Group>
-          <Button
-            variant="dark"
-            type="submit"
-            size="sm"
-          >
-            Submit
-          </Button>
-        </Form>
-      </div>
-    )
-  }
+  return (
+    <Fragment>
+      <Button variant="success" onClick={handleShow}>Edit</Button>
+      <Modal size="sm" show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Artwork</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="name">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="name"
+                value={art.name}
+                onChange={handleChange}
+                placeholder="Enter Piece Title"
+              />
+            </Form.Group>
+            <Form.Group controlId="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="description"
+                value={art.description}
+                onChange={handleChange}
+                placeholder="Enter Description"
+              />
+            </Form.Group>
+            <Modal.Footer>
+              <Button
+                type="Submit"
+                variant="dark"
+                className="mr-auto">
+                Submit
+              </Button>
+              <DestroyArt
+                user={props.user}
+                msgAlert={props.msgAlert}/>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
+    </Fragment>
+  )
 }
 
-export default withRouter(UpdateArt)
+export default UpdateArt
