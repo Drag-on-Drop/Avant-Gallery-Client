@@ -3,8 +3,8 @@ import { Route } from 'react-router-dom'
 
 import AuthenticatedRoute from './AuthenticatedRoute'
 import AutoDismissAlert from './AutoDismissAlert/AutoDismissAlert'
-import Header from './layout/Header'
-import Footer from './layout/Footer'
+import Header from './Layout/Header'
+import Footer from './Layout/Footer'
 import SignUp from './auth/SignUp'
 import SignIn from './auth/SignIn'
 import SignOut from './auth/SignOut'
@@ -12,10 +12,10 @@ import UserSettings from './settings/UserSettings'
 import ShowArt from './artwork/ShowArt'
 import IndexArt from './artwork/IndexArt'
 import IndexArtist from './auth/IndexArtist'
-import ShowArtist from './layout/ShowArtist'
+import ShowArtist from './Layout/ShowArtist'
 import UploadS3Art from './artwork/UploadS3Art'
 import UpdateArt from './artwork/UpdateArt'
-import Home from './layout/Home'
+import Home from './Layout/Home'
 
 class App extends Component {
   constructor () {
