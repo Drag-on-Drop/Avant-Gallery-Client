@@ -4,7 +4,8 @@ import { showArtist } from '../../api/artist-api'
 import { showArtistArt } from '../../api/artwork'
 import messages from '../AutoDismissAlert/messages'
 import ArtCardColumns from './../artwork/ArtCardColumns'
-import Spinner from 'react-bootstrap/Spinner'
+// import Spinner from 'react-bootstrap/Spinner'
+import Loading from './Loading'
 
 class ShowArtist extends Component {
   constructor (props) {
@@ -107,16 +108,7 @@ class ShowArtist extends Component {
           <br />
           <p>{biography}</p>
         </div>
-        {this.state.loadingArt ? artCards
-          : <div>
-            <Spinner animation="grow" variant="primary" />
-            <Spinner animation="grow" variant="secondary" />
-            <Spinner animation="grow" variant="success" />
-            <Spinner animation="grow" variant="danger" />
-            <Spinner animation="grow" variant="warning" />
-            <Spinner animation="grow" variant="info" />
-            <Spinner animation="grow" variant="dark" />
-          </div>}
+        {this.state.loadingArt ? artCards : <Loading />}
       </React.Fragment>
     )
   }

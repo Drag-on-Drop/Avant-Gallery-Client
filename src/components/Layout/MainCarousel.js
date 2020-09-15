@@ -6,11 +6,16 @@ import Row from 'react-bootstrap/Row'
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/Col'
 import messages from '../AutoDismissAlert/messages'
+import Loading from './Loading'
 
 const MainCarousel = (props) => {
   const [images, setImages] = useState([])
 
   const itemize = (images) => {
+    if (images.length === 0) {
+      return (<Loading />)
+    }
+
     return (
       <Carousel>
         {images.map((image) => (
@@ -33,7 +38,7 @@ const MainCarousel = (props) => {
     getRecentImages()
       .then(response => setImages(response.data.artworks))
       .catch(error => {
-        this.props.msgAlert({
+        props.msgAlert({
           heading: 'Load Images Failed: ' + error.message,
           message: messages.loadCarouselFailure,
           variant: 'danger'
