@@ -45,7 +45,7 @@ class IndexArtist extends Component {
       jsx = <p>No artists</p>
     } else {
       jsx = (
-        <ListGroup>
+        <ListGroup variant="flush">
           {this.state.artists.map(artist => {
             return (
               <ListGroup.Item key={artist._id}>
